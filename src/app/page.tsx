@@ -1,5 +1,5 @@
 import AboutSection from "@/components/home/AboutSection";
-import BannerSection from "@/components/home/BannerSection";
+import BannerSection from "@/components/home/HeroSection";
 import FormSection from "@/components/home/FormSection";
 import GallerySection from "@/components/home/GallerySection";
 import InformationSection from "@/components/home/InformationSection";
@@ -16,6 +16,7 @@ import {
   getUnitTypes,
   getVideo,
 } from "@/lib/wordpress";
+import HeroSection from "@/components/home/HeroSection";
 
 // const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -44,15 +45,19 @@ export default async function HomePage() {
 
   // console.log(aboutData);
   return (
-    <main className="bg-accent">
-      <BannerSection slides={bannerSlides} />
+    <>
+      <HeroSection
+        data={{
+          slides: bannerSlides,
+          title: "VANA",
+          subtitle: "Asset Five Presents",
+          tagline: "Balance of Urbanized Living",
+          price: "19.9",
+          price_unit: "MB*",
+        }}
+      />
       <FormSection />
       <AboutSection data={aboutData} />
-      <InformationSection data={informationData} />
-      <UnitSection units={unitTypes} />
-      <GallerySection data={galleryData} />
-      <VideoSection data={videoData} />
-      <LocationSection location={locationData} contact={contactData} />
-    </main>
+    </>
   );
 }

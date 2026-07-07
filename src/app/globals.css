@@ -1,17 +1,13 @@
+@import "tailwindcss";
+
 /* ============================================
-   VANA Ratchapruek — Theme System
+   VANA Ratchapruek — Theme System (Tailwind v4)
    ============================================
    
    Usage (Next.js):
    ────────────────
-   1. Set theme on <html> or <body>:
-      <html data-theme="forest-gold">
-   
-   2. Change theme dynamically:
-      document.documentElement.setAttribute('data-theme', 'teak-evergreen')
-   
-   3. Or via React state:
-      <html data-theme={currentTheme}>
+   1. Set theme on <html>:  <html data-theme="forest-gold">
+   2. Swap dynamically:     document.documentElement.setAttribute('data-theme', 'teak-evergreen')
    
    Available themes:
    ─────────────────
@@ -25,17 +21,65 @@
    meadow-champagne   (#8)  Meadow & champagne
    forest-terracotta  (#9)  Forest & terracotta
    misty-khaki        (#10) Misty forest & khaki
+   
+   Tailwind utilities auto-generated:
+   ──────────────────────────────────
+   bg-primary, bg-accent, bg-surface, bg-footer-bg ...
+   text-on-primary, text-accent, text-muted ...
+   border-accent-border, border-card-dark-border ...
+   hover:bg-accent-hover, hover:text-accent ...
    ============================================ */
 
-/* ─── Base / Reset ─── */
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ─── Tailwind v4 Theme Registration ───
+   Default values (forest-gold) live here.
+   [data-theme] overrides sit outside @layer,
+   so they always win over @theme output.
+   ─────────────────────────────────────── */
+@theme {
+  /* Primary — header, hero overlay, dark sections */
+  --color-primary: #1b3a2d;
+  --color-primary-light: #2a5a42;
+
+  /* Accent — CTAs, labels, highlights */
+  --color-accent: #c4a265;
+  --color-accent-hover: #d4b87a;
+  --color-accent-subtle: rgba(196, 162, 101, 0.15);
+  --color-accent-border: rgba(196, 162, 101, 0.25);
+
+  /* Surface — page bg, light sections */
+  --color-surface: #f5f0e8;
+  --color-surface-white: #ffffff;
+
+  /* Muted — secondary elements */
+  --color-muted: #8fa68a;
+
+  /* Text on dark backgrounds */
+  --color-on-primary: #ffffff;
+  --color-on-primary-muted: rgba(245, 240, 232, 0.75);
+
+  /* Text on light backgrounds */
+  --color-text: #2a2a2a;
+  --color-text-muted: rgba(42, 42, 42, 0.7);
+
+  /* Hero overlay gradient stops */
+  --color-overlay-start: rgba(27, 58, 45, 0.3);
+  --color-overlay-mid: rgba(27, 58, 45, 0.6);
+  --color-overlay-end: rgba(27, 58, 45, 0.95);
+
+  /* Cards on dark bg */
+  --color-card-dark-bg: rgba(255, 255, 255, 0.04);
+  --color-card-dark-border: rgba(196, 162, 101, 0.15);
+  --color-card-dark-border-hover: rgba(196, 162, 101, 0.3);
+
+  /* Footer */
+  --color-footer-bg: #111111;
+
+  /* Fonts — Next.js localFont injects actual values via className */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
 }
 
+/* ─── Base Styles ─── */
 html {
   scroll-behavior: smooth;
 }
@@ -44,62 +88,15 @@ body {
   font-family: var(--font-body);
   background-color: var(--color-surface);
   color: var(--color-text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* ─── Font Tokens ─── */
-:root {
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: "Inter", system-ui, -apple-system, sans-serif;
-}
-
-/* ─── Semantic Color Tokens ───
-   These are what components consume.
-   Each theme below overrides these values.
-   ────────────────────────────────────── */
-:root {
-  /* Primary — used for header, hero overlay, dark sections */
-  --color-primary: #1b3a2d;
-  --color-primary-light: #2a5a42;
-
-  /* Accent — used for CTAs, labels, highlights, borders */
-  --color-accent: #c4a265;
-  --color-accent-hover: #d4b87a;
-  --color-accent-subtle: rgba(196, 162, 101, 0.15);
-  --color-accent-border: rgba(196, 162, 101, 0.25);
-
-  /* Surface — page backgrounds, light sections */
-  --color-surface: #f5f0e8;
-  --color-surface-white: #ffffff;
-
-  /* Muted — secondary elements, tags, dividers */
-  --color-muted: #8fa68a;
-
-  /* Text */
-  --color-text: #2a2a2a;
-  --color-text-on-primary: #ffffff;
-  --color-text-on-primary-muted: rgba(245, 240, 232, 0.6);
-  --color-text-muted: rgba(42, 42, 42, 0.7);
-
-  /* Overlay — hero gradient, dark section backgrounds */
-  --color-overlay-start: rgba(27, 58, 45, 0.3);
-  --color-overlay-mid: rgba(27, 58, 45, 0.6);
-  --color-overlay-end: rgba(27, 58, 45, 0.95);
-
-  /* Card on dark bg */
-  --color-card-dark-bg: rgba(255, 255, 255, 0.04);
-  --color-card-dark-border: rgba(196, 162, 101, 0.15);
-  --color-card-dark-border-hover: rgba(196, 162, 101, 0.3);
-
-  /* Footer */
-  --color-footer-bg: #111111;
 }
 
 /* ============================================
-   THEME 1 — Deep forest & gold (default)
+   THEME OVERRIDES
+   These sit outside @layer, so they beat
+   @theme output in the cascade.
    ============================================ */
+
+/* Theme 1 — Deep forest & gold (same as @theme defaults) */
 [data-theme="forest-gold"] {
   --color-primary: #1b3a2d;
   --color-primary-light: #2a5a42;
@@ -109,9 +106,9 @@ body {
   --color-accent-border: rgba(196, 162, 101, 0.25);
   --color-surface: #f5f0e8;
   --color-muted: #8fa68a;
+  --color-on-primary: #ffffff;
+  --color-on-primary-muted: rgba(245, 240, 232, 0.75);
   --color-text: #2a2a2a;
-  --color-text-on-primary: #ffffff;
-  --color-text-on-primary-muted: rgba(245, 240, 232, 0.6);
   --color-text-muted: rgba(42, 42, 42, 0.7);
   --color-overlay-start: rgba(27, 58, 45, 0.3);
   --color-overlay-mid: rgba(27, 58, 45, 0.6);
@@ -122,9 +119,7 @@ body {
   --color-footer-bg: #111111;
 }
 
-/* ============================================
-   THEME 2 — Warm earth & sage
-   ============================================ */
+/* Theme 2 — Warm earth & sage */
 [data-theme="earth-sage"] {
   --color-primary: #5c6b52;
   --color-primary-light: #8a9a7e;
@@ -134,9 +129,9 @@ body {
   --color-accent-border: rgba(184, 149, 106, 0.25);
   --color-surface: #f2ede4;
   --color-muted: #d4c9b8;
+  --color-on-primary: #f2ede4;
+  --color-on-primary-muted: rgba(242, 237, 228, 0.75);
   --color-text: #3d3d37;
-  --color-text-on-primary: #f2ede4;
-  --color-text-on-primary-muted: rgba(242, 237, 228, 0.6);
   --color-text-muted: rgba(61, 61, 55, 0.7);
   --color-overlay-start: rgba(92, 107, 82, 0.3);
   --color-overlay-mid: rgba(92, 107, 82, 0.6);
@@ -147,9 +142,7 @@ body {
   --color-footer-bg: #1a1a17;
 }
 
-/* ============================================
-   THEME 3 — Charcoal & bronze
-   ============================================ */
+/* Theme 3 — Charcoal & bronze */
 [data-theme="charcoal-bronze"] {
   --color-primary: #1e1e1c;
   --color-primary-light: #2f2f2c;
@@ -159,9 +152,9 @@ body {
   --color-accent-border: rgba(201, 169, 110, 0.25);
   --color-surface: #f4f1eb;
   --color-muted: #6b7c5e;
+  --color-on-primary: #e8dcc8;
+  --color-on-primary-muted: rgba(232, 220, 200, 0.75);
   --color-text: #1a1a18;
-  --color-text-on-primary: #e8dcc8;
-  --color-text-on-primary-muted: rgba(232, 220, 200, 0.6);
   --color-text-muted: rgba(26, 26, 24, 0.7);
   --color-overlay-start: rgba(30, 30, 28, 0.4);
   --color-overlay-mid: rgba(30, 30, 28, 0.65);
@@ -172,9 +165,7 @@ body {
   --color-footer-bg: #0e0e0d;
 }
 
-/* ============================================
-   THEME 4 — Garden teal & sand
-   ============================================ */
+/* Theme 4 — Garden teal & sand */
 [data-theme="garden-sand"] {
   --color-primary: #2c4a3e;
   --color-primary-light: #3e6354;
@@ -184,9 +175,9 @@ body {
   --color-accent-border: rgba(232, 201, 160, 0.25);
   --color-surface: #fafaf6;
   --color-muted: #a3b8a0;
+  --color-on-primary: #fafaf6;
+  --color-on-primary-muted: rgba(250, 250, 246, 0.75);
   --color-text: #333330;
-  --color-text-on-primary: #fafaf6;
-  --color-text-on-primary-muted: rgba(250, 250, 246, 0.6);
   --color-text-muted: rgba(51, 51, 48, 0.7);
   --color-overlay-start: rgba(44, 74, 62, 0.3);
   --color-overlay-mid: rgba(44, 74, 62, 0.6);
@@ -197,9 +188,7 @@ body {
   --color-footer-bg: #141413;
 }
 
-/* ============================================
-   THEME 5 — Light & botanical
-   ============================================ */
+/* Theme 5 — Light & botanical */
 [data-theme="light-botanical"] {
   --color-primary: #3a5a40;
   --color-primary-light: #4e7350;
@@ -209,9 +198,9 @@ body {
   --color-accent-border: rgba(58, 90, 64, 0.2);
   --color-surface: #f7f4ee;
   --color-muted: #a7c4a0;
+  --color-on-primary: #f7f4ee;
+  --color-on-primary-muted: rgba(247, 244, 238, 0.75);
   --color-text: #2b2b28;
-  --color-text-on-primary: #f7f4ee;
-  --color-text-on-primary-muted: rgba(247, 244, 238, 0.6);
   --color-text-muted: rgba(43, 43, 40, 0.7);
   --color-overlay-start: rgba(58, 90, 64, 0.3);
   --color-overlay-mid: rgba(58, 90, 64, 0.55);
@@ -222,9 +211,7 @@ body {
   --color-footer-bg: #151514;
 }
 
-/* ============================================
-   THEME 6 — Teak & evergreen
-   ============================================ */
+/* Theme 6 — Teak & evergreen */
 [data-theme="teak-evergreen"] {
   --color-primary: #354b45;
   --color-primary-light: #4a6960;
@@ -234,9 +221,9 @@ body {
   --color-accent-border: rgba(212, 165, 116, 0.25);
   --color-surface: #f0e6d8;
   --color-muted: #9b7b5e;
+  --color-on-primary: #f0e6d8;
+  --color-on-primary-muted: rgba(240, 230, 216, 0.75);
   --color-text: #2a2825;
-  --color-text-on-primary: #f0e6d8;
-  --color-text-on-primary-muted: rgba(240, 230, 216, 0.6);
   --color-text-muted: rgba(42, 40, 37, 0.7);
   --color-overlay-start: rgba(53, 75, 69, 0.3);
   --color-overlay-mid: rgba(53, 75, 69, 0.6);
@@ -247,9 +234,7 @@ body {
   --color-footer-bg: #131210;
 }
 
-/* ============================================
-   THEME 7 — Full green spectrum
-   ============================================ */
+/* Theme 7 — Full green spectrum */
 [data-theme="full-green"] {
   --color-primary: #1a2f28;
   --color-primary-light: #2d4a3e;
@@ -259,9 +244,9 @@ body {
   --color-accent-border: rgba(136, 176, 154, 0.25);
   --color-surface: #f5f7f2;
   --color-muted: #c1d4b8;
+  --color-on-primary: #c1d4b8;
+  --color-on-primary-muted: rgba(193, 212, 184, 0.75);
   --color-text: #2d2d2a;
-  --color-text-on-primary: #c1d4b8;
-  --color-text-on-primary-muted: rgba(193, 212, 184, 0.6);
   --color-text-muted: rgba(45, 45, 42, 0.7);
   --color-overlay-start: rgba(26, 47, 40, 0.3);
   --color-overlay-mid: rgba(26, 47, 40, 0.6);
@@ -272,9 +257,7 @@ body {
   --color-footer-bg: #0f1a15;
 }
 
-/* ============================================
-   THEME 8 — Meadow & champagne
-   ============================================ */
+/* Theme 8 — Meadow & champagne */
 [data-theme="meadow-champagne"] {
   --color-primary: #2e3c35;
   --color-primary-light: #4a5e52;
@@ -284,9 +267,9 @@ body {
   --color-accent-border: rgba(217, 197, 160, 0.25);
   --color-surface: #fbf8f3;
   --color-muted: #b4c4a8;
+  --color-on-primary: #fbf8f3;
+  --color-on-primary-muted: rgba(251, 248, 243, 0.75);
   --color-text: #2a2a26;
-  --color-text-on-primary: #fbf8f3;
-  --color-text-on-primary-muted: rgba(251, 248, 243, 0.6);
   --color-text-muted: rgba(42, 42, 38, 0.7);
   --color-overlay-start: rgba(46, 60, 53, 0.3);
   --color-overlay-mid: rgba(46, 60, 53, 0.6);
@@ -297,9 +280,7 @@ body {
   --color-footer-bg: #121210;
 }
 
-/* ============================================
-   THEME 9 — Forest & terracotta
-   ============================================ */
+/* Theme 9 — Forest & terracotta */
 [data-theme="forest-terracotta"] {
   --color-primary: #3b4a3f;
   --color-primary-light: #536656;
@@ -309,9 +290,9 @@ body {
   --color-accent-border: rgba(192, 122, 80, 0.25);
   --color-surface: #fcf9f5;
   --color-muted: #7d9484;
+  --color-on-primary: #fcf9f5;
+  --color-on-primary-muted: rgba(252, 249, 245, 0.75);
   --color-text: #2c2c28;
-  --color-text-on-primary: #fcf9f5;
-  --color-text-on-primary-muted: rgba(252, 249, 245, 0.6);
   --color-text-muted: rgba(44, 44, 40, 0.7);
   --color-overlay-start: rgba(59, 74, 63, 0.3);
   --color-overlay-mid: rgba(59, 74, 63, 0.6);
@@ -322,9 +303,7 @@ body {
   --color-footer-bg: #141311;
 }
 
-/* ============================================
-   THEME 10 — Misty forest & khaki
-   ============================================ */
+/* Theme 10 — Misty forest & khaki */
 [data-theme="misty-khaki"] {
   --color-primary: #1f3329;
   --color-primary-light: #3a5445;
@@ -334,9 +313,9 @@ body {
   --color-accent-border: rgba(184, 168, 138, 0.25);
   --color-surface: #f3efe7;
   --color-muted: #7a9b82;
+  --color-on-primary: #f3efe7;
+  --color-on-primary-muted: rgba(243, 239, 231, 0.75);
   --color-text: #252523;
-  --color-text-on-primary: #f3efe7;
-  --color-text-on-primary-muted: rgba(243, 239, 231, 0.6);
   --color-text-muted: rgba(37, 37, 35, 0.7);
   --color-overlay-start: rgba(31, 51, 41, 0.3);
   --color-overlay-mid: rgba(31, 51, 41, 0.6);
@@ -348,53 +327,7 @@ body {
 }
 
 /* ============================================
-   Utility Classes
-   ============================================ */
-
-/* Backgrounds */
-.bg-primary {
-  background-color: var(--color-primary);
-}
-.bg-primary-light {
-  background-color: var(--color-primary-light);
-}
-.bg-accent {
-  background-color: var(--color-accent);
-}
-.bg-surface {
-  background-color: var(--color-surface);
-}
-.bg-footer {
-  background-color: var(--color-footer-bg);
-}
-
-/* Text */
-.text-primary {
-  color: var(--color-text);
-}
-.text-accent {
-  color: var(--color-accent);
-}
-.text-muted {
-  color: var(--color-text-muted);
-}
-.text-on-dark {
-  color: var(--color-text-on-primary);
-}
-.text-on-dark-muted {
-  color: var(--color-text-on-primary-muted);
-}
-
-/* Fonts */
-.font-display {
-  font-family: var(--font-display);
-}
-.font-body {
-  font-family: var(--font-body);
-}
-
-/* ============================================
-   Component Tokens (example usage)
+   Component Classes
    ============================================ */
 
 /* Hero overlay gradient */
@@ -460,7 +393,7 @@ body {
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--color-accent-border);
-  color: var(--color-text-on-primary);
+  color: var(--color-on-primary);
   font-size: 14px;
   font-family: var(--font-body);
   outline: none;
@@ -470,7 +403,7 @@ body {
   border-bottom-color: var(--color-accent);
 }
 .input-underline::placeholder {
-  color: var(--color-text-on-primary-muted);
+  color: var(--color-on-primary-muted);
 }
 
 /* Accent divider */

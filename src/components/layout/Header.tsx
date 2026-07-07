@@ -1,31 +1,23 @@
+// components/layout/Header.tsx
 "use client";
 
 import { useState, useEffect } from "react";
-import Logo from "@/components/ui/Logo";
 import Link from "next/link";
-import FullLogo from "../ui/FullLogo";
-import { usePathname } from "next/navigation";
+import { ThemeSwitcher } from "../ui/ThemeSwitcher";
 
-const NAV_LEFT = [
-  { label: "PROJECT CONCEPT", href: "#about" },
-  { label: "PROJECT INFO", href: "#information" },
-  { label: "UNIT TYPE", href: "#unit" },
-];
-
-const NAV_RIGHT = [
+const NAV_ITEMS = [
+  { label: "CONCEPT", href: "#concept" },
+  { label: "PROJECT INFO", href: "#project-info" },
+  { label: "HOUSE TYPES", href: "#house-types" },
+  { label: "FACILITIES", href: "#facilities" },
   { label: "GALLERY", href: "#gallery" },
   { label: "LOCATION", href: "#location" },
-  { label: "CONTACT US", href: "#contact" },
+  { label: "CONTACT", href: "#lead-form" },
 ];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const pathname = usePathname();
-  const isHome = pathname === "/";
-
-  console.log(pathname);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -33,7 +25,6 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
@@ -43,23 +34,31 @@ export default function Header() {
 
   const handleNavClick = () => setMobileOpen(false);
 
+  const navTextClass =
+    scrolled || mobileOpen
+      ? "text-on-primary hover:text-accent"
+      : "text-on-primary/70 hover:text-accent";
+
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-100 transition-all duration-500 ${
-        !isHome || scrolled || mobileOpen
-          ? "bg-accent/95 backdrop-blur-sm"
-          : "bg-transparent"
+      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 border-b ${
+        scrolled || mobileOpen
+          ? "bg-primary/95 backdrop-blur-sm border-accent-border"
+          : "bg-transparent border-transparent"
       }`}
     >
-      <div className="max-w-[var(--container-max)] mx-auto px-6 lg:px-10">
+      <div className="static right-0 m-4">
+        <ThemeSwitcher />
+      </div>
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <nav className="flex items-center justify-between h-20 lg:h-24">
-          {/* Left nav — desktop only */}
-          <ul className="hidden lg:flex items-center gap-8">
-            {NAV_LEFT.map((item) => (
+          {/* Left nav */}
+          <ul className="hidden lg:flex items-center gap-7">
+            {NAV_ITEMS.slice(0, 3).map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="font-body text-[11px] font-normal tracking-[0.2em] text-white/80 hover:text-gold transition-colors duration-300"
+                  className={`text-[11px] font-normal tracking-[0.15em] transition-colors duration-300 ${navTextClass}`}
                 >
                   {item.label}
                 </Link>
@@ -69,25 +68,30 @@ export default function Header() {
 
           {/* Center logo */}
           <Link
-            href="#"
-            className="flex flex-col items-center justify-center gap-1 lg:absolute lg:left-1/2 lg:-translate-x-1/2 h-full"
+            href="#hero"
+            className="flex items-center gap-3 lg:absolute lg:left-1/2 lg:-translate-x-1/2 h-full"
             onClick={handleNavClick}
           >
-            {/* Wave icon */}
-            {/* <Logo width={30} height={10} color="white" />
-            <span className="font-display text-white text-xl lg:text-2xl tracking-[0.25em] font-light">
-              KAILANI
-            </span> */}
-            <FullLogo className="text-white h-[60%]" />
+            <div className="w-9 h-9 rounded-full flex items-center justify-center font-display text-base font-bold bg-gradient-to-br from-accent to-accent-hover text-primary">
+              V
+            </div>
+            <div className="flex flex-col">
+              <span className="font-display text-lg font-semibold tracking-[3px] text-on-primary">
+                VANA
+              </span>
+              <span className="text-[9px] tracking-[2px] uppercase text-accent">
+                RATCHAPRUEK
+              </span>
+            </div>
           </Link>
 
-          {/* Right nav — desktop only */}
-          <ul className="hidden lg:flex items-center gap-8">
-            {NAV_RIGHT.map((item) => (
+          {/* Right nav */}
+          <ul className="hidden lg:flex items-center gap-7">
+            {NAV_ITEMS.slice(3).map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="font-body text-[11px] font-normal tracking-[0.2em] text-white/80 hover:text-gold transition-colors duration-300"
+                  className={`text-[11px] font-normal tracking-[0.15em] transition-colors duration-300 ${navTextClass}`}
                 >
                   {item.label}
                 </Link>
@@ -102,17 +106,17 @@ export default function Header() {
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
             <span
-              className={`block w-6 h-[1.5px] bg-white transition-all duration-300 ${
+              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
                 mobileOpen ? "rotate-45 translate-y-[7.5px]" : ""
               }`}
             />
             <span
-              className={`block w-6 h-[1.5px] bg-white transition-all duration-300 ${
+              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
                 mobileOpen ? "opacity-0" : ""
               }`}
             />
             <span
-              className={`block w-6 h-[1.5px] bg-white transition-all duration-300 ${
+              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
                 mobileOpen ? "-rotate-45 -translate-y-[7.5px]" : ""
               }`}
             />
@@ -122,18 +126,18 @@ export default function Header() {
 
       {/* Mobile menu overlay */}
       <div
-        className={`lg:hidden fixed inset-0 top-20 bg-accent/98 backdrop-blur-md transition-all duration-500 ${
+        className={`lg:hidden fixed inset-0 top-20 bg-primary transition-all duration-500 ${
           mobileOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
       >
-        <ul className="flex flex-col items-center justify-center gap-8 py-16 bg-accent/95 backdrop-blur-md">
-          {[...NAV_LEFT, ...NAV_RIGHT].map((item) => (
+        <ul className="flex flex-col items-center justify-center gap-8 py-16">
+          {NAV_ITEMS.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="font-display text-lg tracking-[0.25em] text-white/80 hover:text-gold transition-colors duration-300"
+                className="font-display text-lg tracking-[0.25em] text-on-primary hover:text-accent transition-colors duration-300"
                 onClick={handleNavClick}
               >
                 {item.label}
