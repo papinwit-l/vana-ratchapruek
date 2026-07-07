@@ -1,0 +1,481 @@
+/* ============================================
+   VANA Ratchapruek — Theme System
+   ============================================
+   
+   Usage (Next.js):
+   ────────────────
+   1. Set theme on <html> or <body>:
+      <html data-theme="forest-gold">
+   
+   2. Change theme dynamically:
+      document.documentElement.setAttribute('data-theme', 'teak-evergreen')
+   
+   3. Or via React state:
+      <html data-theme={currentTheme}>
+   
+   Available themes:
+   ─────────────────
+   forest-gold        (#1)  Deep forest & gold
+   earth-sage         (#2)  Warm earth & sage
+   charcoal-bronze    (#3)  Charcoal & bronze
+   garden-sand        (#4)  Garden teal & sand
+   light-botanical    (#5)  Light & botanical
+   teak-evergreen     (#6)  Teak & evergreen
+   full-green         (#7)  Full green spectrum
+   meadow-champagne   (#8)  Meadow & champagne
+   forest-terracotta  (#9)  Forest & terracotta
+   misty-khaki        (#10) Misty forest & khaki
+   ============================================ */
+
+/* ─── Base / Reset ─── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Font Tokens ─── */
+:root {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ─── Semantic Color Tokens ───
+   These are what components consume.
+   Each theme below overrides these values.
+   ────────────────────────────────────── */
+:root {
+  /* Primary — used for header, hero overlay, dark sections */
+  --color-primary: #1b3a2d;
+  --color-primary-light: #2a5a42;
+
+  /* Accent — used for CTAs, labels, highlights, borders */
+  --color-accent: #c4a265;
+  --color-accent-hover: #d4b87a;
+  --color-accent-subtle: rgba(196, 162, 101, 0.15);
+  --color-accent-border: rgba(196, 162, 101, 0.25);
+
+  /* Surface — page backgrounds, light sections */
+  --color-surface: #f5f0e8;
+  --color-surface-white: #ffffff;
+
+  /* Muted — secondary elements, tags, dividers */
+  --color-muted: #8fa68a;
+
+  /* Text */
+  --color-text: #2a2a2a;
+  --color-text-on-primary: #ffffff;
+  --color-text-on-primary-muted: rgba(245, 240, 232, 0.6);
+  --color-text-muted: rgba(42, 42, 42, 0.7);
+
+  /* Overlay — hero gradient, dark section backgrounds */
+  --color-overlay-start: rgba(27, 58, 45, 0.3);
+  --color-overlay-mid: rgba(27, 58, 45, 0.6);
+  --color-overlay-end: rgba(27, 58, 45, 0.95);
+
+  /* Card on dark bg */
+  --color-card-dark-bg: rgba(255, 255, 255, 0.04);
+  --color-card-dark-border: rgba(196, 162, 101, 0.15);
+  --color-card-dark-border-hover: rgba(196, 162, 101, 0.3);
+
+  /* Footer */
+  --color-footer-bg: #111111;
+}
+
+/* ============================================
+   THEME 1 — Deep forest & gold (default)
+   ============================================ */
+[data-theme="forest-gold"] {
+  --color-primary: #1b3a2d;
+  --color-primary-light: #2a5a42;
+  --color-accent: #c4a265;
+  --color-accent-hover: #d4b87a;
+  --color-accent-subtle: rgba(196, 162, 101, 0.15);
+  --color-accent-border: rgba(196, 162, 101, 0.25);
+  --color-surface: #f5f0e8;
+  --color-muted: #8fa68a;
+  --color-text: #2a2a2a;
+  --color-text-on-primary: #ffffff;
+  --color-text-on-primary-muted: rgba(245, 240, 232, 0.6);
+  --color-text-muted: rgba(42, 42, 42, 0.7);
+  --color-overlay-start: rgba(27, 58, 45, 0.3);
+  --color-overlay-mid: rgba(27, 58, 45, 0.6);
+  --color-overlay-end: rgba(27, 58, 45, 0.95);
+  --color-card-dark-bg: rgba(255, 255, 255, 0.04);
+  --color-card-dark-border: rgba(196, 162, 101, 0.15);
+  --color-card-dark-border-hover: rgba(196, 162, 101, 0.3);
+  --color-footer-bg: #111111;
+}
+
+/* ============================================
+   THEME 2 — Warm earth & sage
+   ============================================ */
+[data-theme="earth-sage"] {
+  --color-primary: #5c6b52;
+  --color-primary-light: #8a9a7e;
+  --color-accent: #b8956a;
+  --color-accent-hover: #cba87d;
+  --color-accent-subtle: rgba(184, 149, 106, 0.15);
+  --color-accent-border: rgba(184, 149, 106, 0.25);
+  --color-surface: #f2ede4;
+  --color-muted: #d4c9b8;
+  --color-text: #3d3d37;
+  --color-text-on-primary: #f2ede4;
+  --color-text-on-primary-muted: rgba(242, 237, 228, 0.6);
+  --color-text-muted: rgba(61, 61, 55, 0.7);
+  --color-overlay-start: rgba(92, 107, 82, 0.3);
+  --color-overlay-mid: rgba(92, 107, 82, 0.6);
+  --color-overlay-end: rgba(92, 107, 82, 0.95);
+  --color-card-dark-bg: rgba(255, 255, 255, 0.05);
+  --color-card-dark-border: rgba(184, 149, 106, 0.15);
+  --color-card-dark-border-hover: rgba(184, 149, 106, 0.3);
+  --color-footer-bg: #1a1a17;
+}
+
+/* ============================================
+   THEME 3 — Charcoal & bronze
+   ============================================ */
+[data-theme="charcoal-bronze"] {
+  --color-primary: #1e1e1c;
+  --color-primary-light: #2f2f2c;
+  --color-accent: #c9a96e;
+  --color-accent-hover: #d9bb82;
+  --color-accent-subtle: rgba(201, 169, 110, 0.15);
+  --color-accent-border: rgba(201, 169, 110, 0.25);
+  --color-surface: #f4f1eb;
+  --color-muted: #6b7c5e;
+  --color-text: #1a1a18;
+  --color-text-on-primary: #e8dcc8;
+  --color-text-on-primary-muted: rgba(232, 220, 200, 0.6);
+  --color-text-muted: rgba(26, 26, 24, 0.7);
+  --color-overlay-start: rgba(30, 30, 28, 0.4);
+  --color-overlay-mid: rgba(30, 30, 28, 0.65);
+  --color-overlay-end: rgba(30, 30, 28, 0.95);
+  --color-card-dark-bg: rgba(255, 255, 255, 0.04);
+  --color-card-dark-border: rgba(201, 169, 110, 0.12);
+  --color-card-dark-border-hover: rgba(201, 169, 110, 0.25);
+  --color-footer-bg: #0e0e0d;
+}
+
+/* ============================================
+   THEME 4 — Garden teal & sand
+   ============================================ */
+[data-theme="garden-sand"] {
+  --color-primary: #2c4a3e;
+  --color-primary-light: #3e6354;
+  --color-accent: #e8c9a0;
+  --color-accent-hover: #f0d7b3;
+  --color-accent-subtle: rgba(232, 201, 160, 0.15);
+  --color-accent-border: rgba(232, 201, 160, 0.25);
+  --color-surface: #fafaf6;
+  --color-muted: #a3b8a0;
+  --color-text: #333330;
+  --color-text-on-primary: #fafaf6;
+  --color-text-on-primary-muted: rgba(250, 250, 246, 0.6);
+  --color-text-muted: rgba(51, 51, 48, 0.7);
+  --color-overlay-start: rgba(44, 74, 62, 0.3);
+  --color-overlay-mid: rgba(44, 74, 62, 0.6);
+  --color-overlay-end: rgba(44, 74, 62, 0.95);
+  --color-card-dark-bg: rgba(255, 255, 255, 0.05);
+  --color-card-dark-border: rgba(232, 201, 160, 0.15);
+  --color-card-dark-border-hover: rgba(232, 201, 160, 0.3);
+  --color-footer-bg: #141413;
+}
+
+/* ============================================
+   THEME 5 — Light & botanical
+   ============================================ */
+[data-theme="light-botanical"] {
+  --color-primary: #3a5a40;
+  --color-primary-light: #4e7350;
+  --color-accent: #d4b896;
+  --color-accent-hover: #e0c8a8;
+  --color-accent-subtle: rgba(58, 90, 64, 0.1);
+  --color-accent-border: rgba(58, 90, 64, 0.2);
+  --color-surface: #f7f4ee;
+  --color-muted: #a7c4a0;
+  --color-text: #2b2b28;
+  --color-text-on-primary: #f7f4ee;
+  --color-text-on-primary-muted: rgba(247, 244, 238, 0.6);
+  --color-text-muted: rgba(43, 43, 40, 0.7);
+  --color-overlay-start: rgba(58, 90, 64, 0.3);
+  --color-overlay-mid: rgba(58, 90, 64, 0.55);
+  --color-overlay-end: rgba(58, 90, 64, 0.92);
+  --color-card-dark-bg: rgba(255, 255, 255, 0.06);
+  --color-card-dark-border: rgba(167, 196, 160, 0.2);
+  --color-card-dark-border-hover: rgba(167, 196, 160, 0.35);
+  --color-footer-bg: #151514;
+}
+
+/* ============================================
+   THEME 6 — Teak & evergreen
+   ============================================ */
+[data-theme="teak-evergreen"] {
+  --color-primary: #354b45;
+  --color-primary-light: #4a6960;
+  --color-accent: #d4a574;
+  --color-accent-hover: #e0b688;
+  --color-accent-subtle: rgba(212, 165, 116, 0.15);
+  --color-accent-border: rgba(212, 165, 116, 0.25);
+  --color-surface: #f0e6d8;
+  --color-muted: #9b7b5e;
+  --color-text: #2a2825;
+  --color-text-on-primary: #f0e6d8;
+  --color-text-on-primary-muted: rgba(240, 230, 216, 0.6);
+  --color-text-muted: rgba(42, 40, 37, 0.7);
+  --color-overlay-start: rgba(53, 75, 69, 0.3);
+  --color-overlay-mid: rgba(53, 75, 69, 0.6);
+  --color-overlay-end: rgba(53, 75, 69, 0.95);
+  --color-card-dark-bg: rgba(255, 255, 255, 0.05);
+  --color-card-dark-border: rgba(212, 165, 116, 0.15);
+  --color-card-dark-border-hover: rgba(212, 165, 116, 0.3);
+  --color-footer-bg: #131210;
+}
+
+/* ============================================
+   THEME 7 — Full green spectrum
+   ============================================ */
+[data-theme="full-green"] {
+  --color-primary: #1a2f28;
+  --color-primary-light: #2d4a3e;
+  --color-accent: #88b09a;
+  --color-accent-hover: #9dc2ac;
+  --color-accent-subtle: rgba(136, 176, 154, 0.15);
+  --color-accent-border: rgba(136, 176, 154, 0.25);
+  --color-surface: #f5f7f2;
+  --color-muted: #c1d4b8;
+  --color-text: #2d2d2a;
+  --color-text-on-primary: #c1d4b8;
+  --color-text-on-primary-muted: rgba(193, 212, 184, 0.6);
+  --color-text-muted: rgba(45, 45, 42, 0.7);
+  --color-overlay-start: rgba(26, 47, 40, 0.3);
+  --color-overlay-mid: rgba(26, 47, 40, 0.6);
+  --color-overlay-end: rgba(26, 47, 40, 0.95);
+  --color-card-dark-bg: rgba(255, 255, 255, 0.04);
+  --color-card-dark-border: rgba(136, 176, 154, 0.15);
+  --color-card-dark-border-hover: rgba(136, 176, 154, 0.3);
+  --color-footer-bg: #0f1a15;
+}
+
+/* ============================================
+   THEME 8 — Meadow & champagne
+   ============================================ */
+[data-theme="meadow-champagne"] {
+  --color-primary: #2e3c35;
+  --color-primary-light: #4a5e52;
+  --color-accent: #d9c5a0;
+  --color-accent-hover: #e5d4b3;
+  --color-accent-subtle: rgba(217, 197, 160, 0.15);
+  --color-accent-border: rgba(217, 197, 160, 0.25);
+  --color-surface: #fbf8f3;
+  --color-muted: #b4c4a8;
+  --color-text: #2a2a26;
+  --color-text-on-primary: #fbf8f3;
+  --color-text-on-primary-muted: rgba(251, 248, 243, 0.6);
+  --color-text-muted: rgba(42, 42, 38, 0.7);
+  --color-overlay-start: rgba(46, 60, 53, 0.3);
+  --color-overlay-mid: rgba(46, 60, 53, 0.6);
+  --color-overlay-end: rgba(46, 60, 53, 0.95);
+  --color-card-dark-bg: rgba(255, 255, 255, 0.05);
+  --color-card-dark-border: rgba(217, 197, 160, 0.15);
+  --color-card-dark-border-hover: rgba(217, 197, 160, 0.3);
+  --color-footer-bg: #121210;
+}
+
+/* ============================================
+   THEME 9 — Forest & terracotta
+   ============================================ */
+[data-theme="forest-terracotta"] {
+  --color-primary: #3b4a3f;
+  --color-primary-light: #536656;
+  --color-accent: #c07a50;
+  --color-accent-hover: #d08c62;
+  --color-accent-subtle: rgba(192, 122, 80, 0.15);
+  --color-accent-border: rgba(192, 122, 80, 0.25);
+  --color-surface: #fcf9f5;
+  --color-muted: #7d9484;
+  --color-text: #2c2c28;
+  --color-text-on-primary: #fcf9f5;
+  --color-text-on-primary-muted: rgba(252, 249, 245, 0.6);
+  --color-text-muted: rgba(44, 44, 40, 0.7);
+  --color-overlay-start: rgba(59, 74, 63, 0.3);
+  --color-overlay-mid: rgba(59, 74, 63, 0.6);
+  --color-overlay-end: rgba(59, 74, 63, 0.95);
+  --color-card-dark-bg: rgba(255, 255, 255, 0.05);
+  --color-card-dark-border: rgba(192, 122, 80, 0.15);
+  --color-card-dark-border-hover: rgba(192, 122, 80, 0.3);
+  --color-footer-bg: #141311;
+}
+
+/* ============================================
+   THEME 10 — Misty forest & khaki
+   ============================================ */
+[data-theme="misty-khaki"] {
+  --color-primary: #1f3329;
+  --color-primary-light: #3a5445;
+  --color-accent: #b8a88a;
+  --color-accent-hover: #cbbb9e;
+  --color-accent-subtle: rgba(184, 168, 138, 0.15);
+  --color-accent-border: rgba(184, 168, 138, 0.25);
+  --color-surface: #f3efe7;
+  --color-muted: #7a9b82;
+  --color-text: #252523;
+  --color-text-on-primary: #f3efe7;
+  --color-text-on-primary-muted: rgba(243, 239, 231, 0.6);
+  --color-text-muted: rgba(37, 37, 35, 0.7);
+  --color-overlay-start: rgba(31, 51, 41, 0.3);
+  --color-overlay-mid: rgba(31, 51, 41, 0.6);
+  --color-overlay-end: rgba(31, 51, 41, 0.95);
+  --color-card-dark-bg: rgba(255, 255, 255, 0.04);
+  --color-card-dark-border: rgba(184, 168, 138, 0.15);
+  --color-card-dark-border-hover: rgba(184, 168, 138, 0.3);
+  --color-footer-bg: #111110;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+/* Backgrounds */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-primary-light {
+  background-color: var(--color-primary-light);
+}
+.bg-accent {
+  background-color: var(--color-accent);
+}
+.bg-surface {
+  background-color: var(--color-surface);
+}
+.bg-footer {
+  background-color: var(--color-footer-bg);
+}
+
+/* Text */
+.text-primary {
+  color: var(--color-text);
+}
+.text-accent {
+  color: var(--color-accent);
+}
+.text-muted {
+  color: var(--color-text-muted);
+}
+.text-on-dark {
+  color: var(--color-text-on-primary);
+}
+.text-on-dark-muted {
+  color: var(--color-text-on-primary-muted);
+}
+
+/* Fonts */
+.font-display {
+  font-family: var(--font-display);
+}
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* ============================================
+   Component Tokens (example usage)
+   ============================================ */
+
+/* Hero overlay gradient */
+.hero-overlay {
+  background: linear-gradient(
+    180deg,
+    var(--color-overlay-start) 0%,
+    var(--color-overlay-mid) 50%,
+    var(--color-overlay-end) 100%
+  );
+}
+
+/* CTA button */
+.btn-cta {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  border: none;
+  padding: 16px 48px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: background-color 0.3s ease;
+}
+.btn-cta:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* Card on dark background */
+.card-dark {
+  background: var(--color-card-dark-bg);
+  border: 1px solid var(--color-card-dark-border);
+  transition: border-color 0.3s ease;
+}
+.card-dark:hover {
+  border-color: var(--color-card-dark-border-hover);
+}
+
+/* Section label / eyebrow */
+.section-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.section-label--light {
+  color: var(--color-muted);
+}
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+/* Input underline (lead form) */
+.input-underline {
+  width: 100%;
+  padding: 12px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-accent-border);
+  color: var(--color-text-on-primary);
+  font-size: 14px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+.input-underline:focus {
+  border-bottom-color: var(--color-accent);
+}
+.input-underline::placeholder {
+  color: var(--color-text-on-primary-muted);
+}
+
+/* Accent divider */
+.divider-accent {
+  width: 48px;
+  height: 2px;
+  background-color: var(--color-accent);
+}
