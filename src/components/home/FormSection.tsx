@@ -1,28 +1,23 @@
+// components/home/LeadFormSection.tsx
 "use client";
 
 import { useState } from "react";
 import Link from "next/link";
-import Logo from "../ui/Logo";
 import useScrollReveal from "@/hooks/useScrollReveal";
 
-const HEAR_ABOUT_OPTIONS = [
-  "Google Search",
-  "Social Media",
-  "Friend / Referral",
-  "Property Agent",
-  "Billboard / Signage",
-  "News / Article",
-  "Other",
+const HOUSE_TYPES = [
+  { value: "l", label: "Type L — Luxury Collection" },
+  { value: "m", label: "Type M — Premium Collection" },
+  { value: "s", label: "Type S — Classic Collection" },
 ];
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
-export default function FormSection() {
+export default function LeadFormSection() {
   const [accepted, setAccepted] = useState(false);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const { ref, isVisible } = useScrollReveal();
-
   const v = isVisible ? "reveal--visible" : "";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,9 +39,9 @@ export default function FormSection() {
       lastName: (form.elements.namedItem("lastName") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       mobile: (form.elements.namedItem("mobile") as HTMLInputElement).value,
-      hearAbout: (form.elements.namedItem("hearAbout") as HTMLSelectElement)
+      lineId: (form.elements.namedItem("lineId") as HTMLInputElement).value,
+      houseType: (form.elements.namedItem("houseType") as HTMLSelectElement)
         .value,
-      // Honeypot
       company: (form.elements.namedItem("company") as HTMLInputElement).value,
     };
 
@@ -72,49 +67,44 @@ export default function FormSection() {
   };
 
   return (
-    <section id="contact" className="bg-accent py-14 lg:py-28">
-      <div
-        ref={ref}
-        className="max-w-[var(--container-narrow)] mx-auto px-6 lg:px-10"
-      >
+    <section id="lead-form" className="bg-primary py-14 lg:py-20">
+      <div ref={ref} className="max-w-2xl mx-auto px-6 lg:px-10">
         {/* Heading */}
-        <div className="text-center mb-8 lg:mb-16">
-          <Logo className={`mx-auto mb-2 text-white h-3 reveal ${v}`} />
-
-          <h2
-            className={`font-display text-warm-100 text-3xl lg:text-4xl tracking-[0.2em] uppercase mb-4 reveal reveal-delay-1 ${v}`}
-          >
+        <div className={`text-center mb-8 lg:mb-12 reveal ${v}`}>
+          <h2 className="section-heading text-on-primary text-3xl lg:text-4xl">
             Register
           </h2>
-          <p
-            className={`font-body text-xs lg:text-sm tracking-[0.15em] uppercase text-warm-300 reveal reveal-delay-2 ${v}`}
-          >
+          <p className="text-xs tracking-[0.15em] uppercase text-on-primary-muted mt-3">
             Register for more information with exclusive privileges.
           </p>
         </div>
 
-        {/* Success Message */}
+        {/* Success */}
         {status === "success" && (
-          <div className="text-center mb-10">
-            <p className="font-body text-sm tracking-[0.05em] text-warm-200">
-              Thank you for registering. We will contact you shortly.
+          <div className="text-center py-8">
+            <h3 className="font-display text-xl text-on-primary mb-2">
+              Thank You
+            </h3>
+            <p className="text-sm text-on-primary-muted">
+              We will contact you shortly with exclusive project details.
             </p>
           </div>
         )}
 
-        {/* Error Message */}
+        {/* Error */}
         {status === "error" && errorMsg && (
           <div className="text-center mb-6">
-            <p className="font-body text-sm tracking-[0.05em] text-red-400">
-              {errorMsg}
-            </p>
+            <p className="text-sm text-red-400">{errorMsg}</p>
           </div>
         )}
 
         {/* Form */}
         {status !== "success" && (
-          <form onSubmit={handleSubmit} className="space-y-6 lg:space-y-10">
-            {/* Honeypot — hidden from real users */}
+          <form
+            onSubmit={handleSubmit}
+            className={`space-y-6 lg:space-y-8 reveal reveal-delay-1 ${v}`}
+          >
+            {/* Honeypot */}
             <div className="absolute opacity-0 -z-10" aria-hidden="true">
               <input
                 type="text"
@@ -124,82 +114,75 @@ export default function FormSection() {
               />
             </div>
 
-            {/* Row 1: First Name / Last Name */}
-            <div
-              className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 reveal reveal-delay-2 ${v}`}
-            >
-              <div>
-                <input
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name*"
-                  required
-                  className="w-full py-3 bg-transparent border-b border-warm-400/40 text-warm-100 text-sm font-body placeholder:text-warm-400 outline-none focus:border-warm-200 transition-colors duration-300"
-                />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name*"
-                  required
-                  className="w-full py-3 bg-transparent border-b border-warm-400/40 text-warm-100 text-sm font-body placeholder:text-warm-400 outline-none focus:border-warm-200 transition-colors duration-300"
-                />
-              </div>
+            {/* Name row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+              <input
+                type="text"
+                name="firstName"
+                required
+                placeholder="First Name*"
+                className="input-underline"
+              />
+              <input
+                type="text"
+                name="lastName"
+                required
+                placeholder="Last Name*"
+                className="input-underline"
+              />
             </div>
 
-            {/* Row 2: Email / Mobile */}
-            <div
-              className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 reveal reveal-delay-3 ${v}`}
-            >
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email*"
-                  required
-                  className="w-full py-3 bg-transparent border-b border-warm-400/40 text-warm-100 text-sm font-body placeholder:text-warm-400 outline-none focus:border-warm-200 transition-colors duration-300"
-                />
-              </div>
-              <div>
-                <input
-                  type="tel"
-                  name="mobile"
-                  placeholder="Mobile Number*"
-                  required
-                  className="w-full py-3 bg-transparent border-b border-warm-400/40 text-warm-100 text-sm font-body placeholder:text-warm-400 outline-none focus:border-warm-200 transition-colors duration-300"
-                />
-              </div>
+            {/* Contact row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="Email*"
+                className="input-underline"
+              />
+              <input
+                type="tel"
+                name="mobile"
+                required
+                placeholder="Mobile Number*"
+                className="input-underline"
+              />
             </div>
 
-            {/* Row 3: How did you hear about us */}
-            <div className={`reveal reveal-delay-4 ${v}`}>
+            {/* LINE + House type row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+              <input
+                type="text"
+                name="lineId"
+                placeholder="LINE ID (Optional)"
+                className="input-underline"
+              />
               <div className="relative">
                 <select
-                  name="hearAbout"
+                  name="houseType"
                   defaultValue=""
-                  className="w-full py-3 bg-transparent border-b border-warm-400/40 text-sm font-body text-warm-400 outline-none appearance-none cursor-pointer focus:border-warm-200 transition-colors duration-300"
+                  className="input-underline appearance-none cursor-pointer pr-6"
                 >
                   <option value="" disabled>
-                    How did you hear about us?
+                    Preferred House Type
                   </option>
-                  {HEAR_ABOUT_OPTIONS.map((option) => (
+                  {HOUSE_TYPES.map((type) => (
                     <option
-                      key={option}
-                      value={option}
-                      className="bg-accent text-warm-100"
+                      key={type.value}
+                      value={type.value}
+                      className="bg-primary text-on-primary"
                     >
-                      {option}
+                      {type.label}
                     </option>
                   ))}
                 </select>
-                {/* Dropdown arrow */}
                 <svg
                   width="12"
                   height="8"
                   viewBox="0 0 12 8"
                   fill="none"
-                  className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-warm-400"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-on-primary-muted"
                 >
                   <path
                     d="M1 1.5L6 6.5L11 1.5"
@@ -212,38 +195,34 @@ export default function FormSection() {
               </div>
             </div>
 
-            {/* Register button */}
-            <div
-              className={`flex justify-center pt-4 reveal reveal-delay-5 ${v}`}
-            >
+            {/* Submit */}
+            <div className="flex justify-center pt-4">
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="font-display text-lg lg:text-xl tracking-[0.15em] text-warm-200 border border-warm-400/50 rounded-full px-12 lg:px-20 py-3 lg:py-3.5 hover:bg-warm-200 hover:text-accent transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="font-display text-lg tracking-[0.15em] text-on-primary border border-accent-border rounded-full px-16 lg:px-20 py-3 hover:bg-accent hover:text-primary transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {status === "submitting" ? "Submitting..." : "Register"}
               </button>
             </div>
 
-            {/* Privacy policy checkbox */}
-            <div
-              className={`flex items-start gap-3 pt-2 reveal reveal-delay-5 ${v}`}
-            >
+            {/* Privacy */}
+            <div className="flex items-start gap-3">
               <input
                 type="checkbox"
                 id="privacy"
                 checked={accepted}
                 onChange={(e) => setAccepted(e.target.checked)}
-                className="mt-1 w-4 h-4 shrink-0 appearance-none border border-warm-400/50 bg-transparent checked:bg-warm-200 checked:border-warm-200 cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:inset-0 checked:after:flex checked:after:items-center checked:after:justify-center checked:after:text-accent checked:after:text-[10px] checked:after:font-bold"
+                className="mt-1 w-4 h-4 shrink-0 appearance-none border border-accent-border bg-transparent checked:bg-accent checked:border-accent cursor-pointer relative checked:after:content-['✓'] checked:after:absolute checked:after:inset-0 checked:after:flex checked:after:items-center checked:after:justify-center checked:after:text-primary checked:after:text-[10px] checked:after:font-bold"
               />
               <label
                 htmlFor="privacy"
-                className="font-body text-[10px] lg:text-xs tracking-[0.05em] uppercase text-warm-400 leading-relaxed cursor-pointer"
+                className="text-[10px] lg:text-[11px] tracking-wide text-on-primary-muted leading-relaxed cursor-pointer"
               >
                 Accept I have read and accept the{" "}
                 <Link
                   href="/privacy"
-                  className="underline underline-offset-2 hover:text-warm-200 transition-colors duration-300"
+                  className="underline underline-offset-2 hover:text-accent transition-colors duration-300"
                 >
                   Privacy Policy
                 </Link>{" "}
