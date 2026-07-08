@@ -1,4 +1,3 @@
-// components/layout/Header.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -47,9 +46,6 @@ export default function Header() {
           : "bg-transparent border-transparent"
       }`}
     >
-      <div className="static right-0 m-4">
-        <ThemeSwitcher />
-      </div>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <nav className="flex items-center justify-between h-20 lg:h-24">
           {/* Left nav */}
@@ -85,42 +81,45 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Right nav */}
-          <ul className="hidden lg:flex items-center gap-7">
+          {/* Right nav + theme switcher */}
+          <div className="hidden lg:flex items-center gap-7">
             {NAV_ITEMS.slice(3).map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`text-[11px] font-normal tracking-[0.15em] transition-colors duration-300 ${navTextClass}`}
-                >
-                  {item.label}
-                </Link>
-              </li>
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`text-[11px] font-normal tracking-[0.15em] transition-colors duration-300 ${navTextClass}`}
+              >
+                {item.label}
+              </Link>
             ))}
-          </ul>
+            <ThemeSwitcher />
+          </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 cursor-pointer"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          >
-            <span
-              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
-                mobileOpen ? "rotate-45 translate-y-[7.5px]" : ""
-              }`}
-            />
-            <span
-              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
-                mobileOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
-                mobileOpen ? "-rotate-45 -translate-y-[7.5px]" : ""
-              }`}
-            />
-          </button>
+          {/* Mobile: theme switcher + hamburger */}
+          <div className="lg:hidden flex items-center gap-3">
+            <ThemeSwitcher />
+            <button
+              className="relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 cursor-pointer"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
+              <span
+                className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
+                  mobileOpen ? "rotate-45 translate-y-[7.5px]" : ""
+                }`}
+              />
+              <span
+                className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
+                  mobileOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
+                  mobileOpen ? "-rotate-45 -translate-y-[7.5px]" : ""
+                }`}
+              />
+            </button>
+          </div>
         </nav>
       </div>
 

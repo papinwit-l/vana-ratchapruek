@@ -5,8 +5,8 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getContact } from "@/lib/wordpress";
 import { cookies } from "next/headers";
-import { Theme, ThemeProvider } from "@/components/theme-provider";
-import { THEMES } from "@/config/theme";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Theme, THEMES } from "@/config/theme";
 
 // ─── Fonts ───
 // --font-display → used by .font-display, .section-heading in global.css

@@ -1,17 +1,10 @@
 "use client";
 
-import { THEMES } from "@/config/theme";
+import { THEMES, type Theme } from "@/config/theme";
 import { createContext, useContext, useState } from "react";
 
-// Export this type so we can use it in other files
-export type Theme = (typeof THEMES)[number];
-
 const ThemeContext = createContext<
-  | {
-      theme: Theme;
-      setTheme: (theme: Theme) => void;
-    }
-  | undefined
+  { theme: Theme; setTheme: (theme: Theme) => void } | undefined
 >(undefined);
 
 export function ThemeProvider({
@@ -38,8 +31,6 @@ export function ThemeProvider({
 
 export function useTheme() {
   const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
+  if (!context) throw new Error("useTheme must be used within a ThemeProvider");
   return context;
 }
