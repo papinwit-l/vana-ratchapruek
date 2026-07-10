@@ -63,8 +63,8 @@ export default function LocationSection({
           <p
             className={`text-sm text-on-primary-muted max-w-md mx-auto reveal reveal-delay-2 ${hv}`}
           >
-            Ratchapruek Road — Bangkok's green corridor linking the city center
-            to nature and convenience.
+            ถนนราชพฤกษ์ — เส้นทางแห่งการใช้ชีวิต
+            ที่ผสานความร่มรื่นของธรรมชาติเข้ากับการเชื่อมต่อเมืองอย่างลงตัว
           </p>
         </div>
 
@@ -108,7 +108,7 @@ export default function LocationSection({
             {/* Graphic map */}
             {location.mapImage && (
               <div
-                className={`absolute inset-0 transition-opacity duration-500 ${
+                className={`absolute bg-[#1d2c21] inset-0 transition-opacity duration-500 ${
                   mapView === "graphic"
                     ? "opacity-100 z-10"
                     : "opacity-0 z-0 pointer-events-none"

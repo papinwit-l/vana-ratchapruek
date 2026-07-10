@@ -1,7 +1,7 @@
 // data/location.ts
 
 export const LOCATION_DATA = {
-  mapImage: "/images/banner/banner-image-01.png",
+  mapImage: "/images/vana-location.webp",
   googleMapsUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.5!2d100.45!3d13.78!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQ2JzQ4LjAiTiAxMDDCsDI3JzAwLjAiRQ!5e0!3m2!1sen!2sth!4v1234567890",
   address: [

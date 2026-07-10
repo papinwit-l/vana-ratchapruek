@@ -23,6 +23,8 @@ import HouseTypeSection from "@/components/home/HouseTypeSection";
 import FacilitiesSection from "@/components/home/FacilitiesSection";
 import { Baby, Cable, Dumbbell, Sofa, TreePine, Waves } from "lucide-react";
 import { CONTACT_DATA, LOCATION_DATA } from "@/data/location";
+import { HOUSE_TYPES_DATA } from "@/data/house-type";
+import { FACILITIES_DATA } from "@/data/facilities";
 
 // const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -65,139 +67,31 @@ export default async function HomePage() {
       <FormSection />
       <ConceptSection
         data={{
-          heading: ["วนา", "Where Nature Meets Home"],
+          heading: ["วนา", "Balance of Urbanized Living"],
           paragraphs: [
-            'VANA — derived from "วนา" meaning forest — is a sanctuary where nature and modern living coexist in perfect balance. Every detail is designed to bring the serenity of nature into your daily life.',
-            "Located on Ratchapruek Road, one of Bangkok's most connected corridors, VANA offers the rare luxury of space, privacy, and convenience — all within reach of the city's pulse.",
+            'สุนทรียภาพใหม่ของที่อยู่อาศัย ที่ร่มรื่นและร่มเย็น ดั่งอาศัยอยู่ใน "วนา" ซึ่งเป็นคำภาษาไทย แปลว่า "ป่า" VANA บ้านที่ออกแบบโดยได้รับแรงบันดาลใจจากการอยู่อาศัยท่ามกลางพงไพรเพื่อตอบรับไลฟ์สไตล์คนเมืองให้อยู่สบาย หรูหราบนทำเลศักยภาพจาก A5 ให้การพักผ่อนของคุณและครอบครัวเป็นพื้นที่รีชาร์จร่างกายผ่อนคลาย และเติมความสุข เสมือนอยู่ท่ามกลางธรรมชาติ',
+            'บ้านเดี่ยว 3 ชั้นรูปแบบใหม่บนทำเลใจกลางราชพฤกษ์ เชื่อมต่อชีวิตคนเมืองด้วยการเดินทางเข้าเมืองที่สะดวกสบาย ติดห้างสรรพสินค้าชื่อดังถึง 2 ห้าง และใกล้ชิดติดธรรมชาติด้วยต้นไม้ใหญ่มากมายทั่วทั้งโครงการ ให้ที่พักอาศัยของคุณร่มรื่น ดั่ง "วนา" พร้อมความสงบและเป็นส่วนตัวเพียง 43 ครอบครัว',
           ],
           image: "/images/banner/banner-image-01.png",
         }}
       />
       <ProjectInfoSection
         data={{
-          items: [
-            { label: "Developer", value: "Asset Five" },
-            { label: "Location", value: "Ratchapruek Road" },
-            { label: "Land Area", value: "17-1-53.2 Rai" },
-            { label: "Total Units", value: "43 Units" },
-            { label: "Starting Price", value: "19.9 MB" },
-          ],
-        }}
-      />
-      <HouseTypeSection
-        data={{
-          types: [
-            {
-              name: "Type L",
-              subtitle: "Luxury Collection",
-              image: "/images/banner/banner-image-01.png",
-              specs: [
-                { label: "Land Area", value: "50–60 sq.wah" },
-                { label: "Usable Area", value: "210 sq.m." },
-                { label: "Bedrooms", value: "4" },
-                { label: "Bathrooms", value: "3" },
-                { label: "Parking", value: "2 Cars" },
-              ],
-              floors: [
-                {
-                  src: "/images/banner/banner-image-02.png",
-                  label: "1st Floor Plan",
-                },
-                {
-                  src: "/images/banner/banner-image-03.png",
-                  label: "2nd Floor Plan",
-                },
-              ],
-            },
-            {
-              name: "Type M",
-              subtitle: "Premium Collection",
-              image: "/images/banner/banner-image-02.png",
-              specs: [
-                { label: "Land Area", value: "40–50 sq.wah" },
-                { label: "Usable Area", value: "180 sq.m." },
-                { label: "Bedrooms", value: "3" },
-                { label: "Bathrooms", value: "3" },
-                { label: "Parking", value: "2 Cars" },
-              ],
-              floors: [
-                {
-                  src: "/images/banner/banner-image-01.png",
-                  label: "1st Floor Plan",
-                },
-                {
-                  src: "/images/banner/banner-image-03.png",
-                  label: "2nd Floor Plan",
-                },
-              ],
-            },
-            {
-              name: "Type S",
-              subtitle: "Classic Collection",
-              image: "/images/banner/banner-image-03.png",
-              specs: [
-                { label: "Land Area", value: "35–40 sq.wah" },
-                { label: "Usable Area", value: "155 sq.m." },
-                { label: "Bedrooms", value: "3" },
-                { label: "Bathrooms", value: "2" },
-                { label: "Parking", value: "2 Cars" },
-              ],
-              floors: [
-                {
-                  src: "/images/banner/banner-image-02.png",
-                  label: "1st Floor Plan",
-                },
-                {
-                  src: "/images/banner/banner-image-01.png",
-                  label: "2nd Floor Plan",
-                },
-              ],
-            },
-          ],
-        }}
-      />
-      <FacilitiesSection
-        data={{
-          image: "/images/banner/banner-image-02.png",
+          backgroundImage: "/images/vana-info-bg.webp",
           items: [
             {
-              icon: "waves",
-              title: "Swimming Pool",
-              description:
-                "Resort-style infinity pool surrounded by tropical landscaping",
+              label: "พัฒนาโครงการโดย",
+              value: "บริษัท แอสเซท ไฟว์ ดีเวลลอปเม้นท์ จำกัด",
             },
-            {
-              icon: "dumbbell",
-              title: "Fitness Center",
-              description:
-                "Fully-equipped modern gym with panoramic garden views",
-            },
-            {
-              icon: "tree",
-              title: "Central Garden",
-              description:
-                "Expansive green spaces and walking trails through native flora",
-            },
-            {
-              icon: "sofa",
-              title: "Clubhouse Lounge",
-              description: "Elegant lounge and co-working space for residents",
-            },
-            {
-              icon: "baby",
-              title: "Kids Playground",
-              description:
-                "Safe and engaging play areas designed for children of all ages",
-            },
-            {
-              icon: "cable",
-              title: "Underground Power",
-              description:
-                "All electrical systems placed underground for clean aesthetics",
-            },
+            { label: "ทำเลที่ตั้ง", value: "ถ.ราชพฤกษ์ (ซอยมหาสวัสดิ์ 2)" },
+            { label: "ขนาดที่ดิน", value: "17-1-53.2 ไร่" },
+            { label: "จำนวนทั้งหมด", value: "43 ยูนิต" },
+            { label: "ราคาเริ่มต้น", value: "19.9 ล้านบาท*" },
           ],
         }}
       />
+      <HouseTypeSection data={HOUSE_TYPES_DATA} />
+      <FacilitiesSection data={FACILITIES_DATA} />
       <GallerySection
         data={{
           images: [
