@@ -89,7 +89,8 @@ export default async function RootLayout({
         <ThemeProvider initialTheme={activeTheme}>
           <Header />
           <main className="flex-1">{children}</main>
-          <Footer contact={contactData} />
+          {/* <Footer contact={contactData} /> */}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
