@@ -20,6 +20,9 @@ import HeroSection from "@/components/home/HeroSection";
 import ConceptSection from "@/components/home/ConceptSection";
 import ProjectInfoSection from "@/components/home/ProjectInfoSection";
 import HouseTypeSection from "@/components/home/HouseTypeSection";
+import FacilitiesSection from "@/components/home/FacilitiesSection";
+import { Baby, Cable, Dumbbell, Sofa, TreePine, Waves } from "lucide-react";
+import { CONTACT_DATA, LOCATION_DATA } from "@/data/location";
 
 // const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -153,6 +156,70 @@ export default async function HomePage() {
           ],
         }}
       />
+      <FacilitiesSection
+        data={{
+          image: "/images/banner/banner-image-02.png",
+          items: [
+            {
+              icon: "waves",
+              title: "Swimming Pool",
+              description:
+                "Resort-style infinity pool surrounded by tropical landscaping",
+            },
+            {
+              icon: "dumbbell",
+              title: "Fitness Center",
+              description:
+                "Fully-equipped modern gym with panoramic garden views",
+            },
+            {
+              icon: "tree",
+              title: "Central Garden",
+              description:
+                "Expansive green spaces and walking trails through native flora",
+            },
+            {
+              icon: "sofa",
+              title: "Clubhouse Lounge",
+              description: "Elegant lounge and co-working space for residents",
+            },
+            {
+              icon: "baby",
+              title: "Kids Playground",
+              description:
+                "Safe and engaging play areas designed for children of all ages",
+            },
+            {
+              icon: "cable",
+              title: "Underground Power",
+              description:
+                "All electrical systems placed underground for clean aesthetics",
+            },
+          ],
+        }}
+      />
+      <GallerySection
+        data={{
+          images: [
+            {
+              src: "/images/banner/banner-image-01.png",
+              alt: "VANA exterior view",
+            },
+            { src: "/images/banner/banner-image-02.png", alt: "VANA garden" },
+            { src: "/images/banner/banner-image-03.png", alt: "VANA interior" },
+            {
+              src: "/images/banner/banner-image-01.png",
+              alt: "VANA pool area",
+            },
+            {
+              src: "/images/banner/banner-image-02.png",
+              alt: "VANA clubhouse",
+            },
+            { src: "/images/banner/banner-image-03.png", alt: "VANA entrance" },
+          ],
+        }}
+      />
+      <LocationSection location={LOCATION_DATA} contact={CONTACT_DATA} />
     </>
   );
 }

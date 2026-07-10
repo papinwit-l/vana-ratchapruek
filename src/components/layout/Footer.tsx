@@ -1,6 +1,6 @@
 // components/layout/Footer.tsx
 import Link from "next/link";
-import type { ContactData, SocialLink } from "@/lib/wordpress";
+import { FacebookIcon, InstagramIcon, LineIcon } from "../ui/SocialMediaIcon";
 
 const NAV_LINKS = [
   { label: "HOME", href: "#hero" },
@@ -12,91 +12,128 @@ const NAV_LINKS = [
   { label: "CONTACT", href: "#lead-form" },
 ];
 
-export default function Footer({ contact }: { contact: ContactData }) {
+const CONTACT_LINKS = [
+  { label: "02-026-3512", href: "tel:02-026-3512" },
+  { label: "Feedback & Complaints", href: "mailto:cs@assetfive.co.th" },
+  { label: "Property Offer", href: "mailto:land@assetfive.co.th" },
+  { label: "Information Request", href: "mailto:info@assetfive.co.th" },
+  { label: "Careers", href: "mailto:hr@assetfive.co.th" },
+];
+
+const SOCIALS = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/assetfive/",
+    Icon: FacebookIcon,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/asset_five/",
+    Icon: InstagramIcon,
+  },
+  { label: "LINE", href: "https://lin.ee/whGimOI", Icon: LineIcon },
+];
+
+export default function Footer() {
   return (
     <footer>
       {/* Main footer */}
-      <div
-        className="pt-16 pb-12 lg:pt-20 lg:pb-16"
-        style={{ background: "var(--color-footer-bg)" }}
-      >
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-8">
-            {/* Left: Brand + Nav + Contact */}
-            <div className="flex-1">
-              {/* Logo */}
-              <Link
-                href="#hero"
-                className="inline-flex flex-col items-start gap-0 mb-10"
-              >
-                <span
-                  className="font-[family-name:var(--font-display)] text-2xl tracking-[4px]"
-                  style={{ color: "var(--color-text-on-primary)" }}
-                >
-                  VANA
-                </span>
-                <span
-                  className="text-[10px] tracking-[2px] uppercase"
-                  style={{ color: "var(--color-accent)" }}
-                >
-                  Ratchapruek — Westville
-                </span>
-              </Link>
+      <div className="bg-footer-bg pt-16 pb-12 lg:pt-20 lg:pb-16">
+        <div className="max-w-6xl mx-auto px-6 lg:px-10">
+          {/* Top: Logo + Company */}
+          <div className="mb-12">
+            <Link
+              href="#hero"
+              className="inline-flex flex-col items-start gap-0 mb-4"
+            >
+              <span className="font-display text-2xl tracking-[4px] text-on-primary">
+                VANA
+              </span>
+              <span className="text-[10px] tracking-[2px] uppercase text-accent">
+                Ratchapruek — Westville
+              </span>
+            </Link>
+            <p className="text-xs tracking-wide text-on-primary-muted mt-2 max-w-lg">
+              Asset Five Group Public Company Limited
+              <br />
+              199 S OASIS Building, 12th Floor, Unit 1210–1212, Vibhavadi
+              Rangsit Rd., Chom Phon, Chatuchak, Bangkok 10900
+            </p>
+          </div>
 
-              {/* Nav */}
-              <nav className="mb-12">
-                <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-12 gap-y-3">
-                  {NAV_LINKS.map((item) => (
-                    <li key={item.href + item.label}>
-                      <Link
-                        href={item.href}
-                        className="text-xs tracking-[0.2em] transition-colors duration-300"
-                        style={{ color: "var(--color-text-on-primary-muted)" }}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-
-              {/* Address + Phone */}
-              <div>
-                {contact?.address?.length > 0 && (
-                  <p
-                    className="text-sm tracking-[0.1em] mb-2"
-                    style={{ color: "var(--color-text-on-primary-muted)" }}
-                  >
-                    {contact.address.join(" ")}
-                  </p>
-                )}
-                {contact?.phone && (
-                  <a
-                    href={`tel:${contact.phone}`}
-                    className="text-lg lg:text-xl font-bold tracking-[0.1em] transition-colors duration-300"
-                    style={{ color: "var(--color-text-on-primary)" }}
-                  >
-                    CALL {contact.phone}
-                  </a>
-                )}
-              </div>
+          {/* Grid: Nav + Contact + Follow */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8">
+            {/* Nav */}
+            <div>
+              <h4 className="text-[11px] tracking-[3px] uppercase text-accent mb-5">
+                Explore
+              </h4>
+              <ul className="space-y-2.5">
+                {NAV_LINKS.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-xs tracking-[0.2em] text-on-primary-muted hover:text-accent transition-colors duration-300"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* Right: Sales info */}
-            <div className="lg:text-right">
-              <h4
-                className="text-[11px] tracking-[3px] uppercase mb-5"
-                style={{ color: "var(--color-accent)" }}
-              >
+            {/* Contact */}
+            <div>
+              <h4 className="text-[11px] tracking-[3px] uppercase text-accent mb-5">
+                Contact Us
+              </h4>
+              <ul className="space-y-2.5">
+                {CONTACT_LINKS.map((item) => (
+                  <li key={item.href}>
+                    <a
+                      href={item.href}
+                      className="text-xs tracking-[0.1em] text-on-primary-muted hover:text-accent transition-colors duration-300"
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Follow + Sales */}
+            <div>
+              <h4 className="text-[11px] tracking-[3px] uppercase text-accent mb-5">
+                Follow Us
+              </h4>
+              <div className="flex items-center gap-3 mb-8">
+                {SOCIALS.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={item.label}
+                    className="w-9 h-9 rounded-full border border-accent-border flex items-center justify-center text-on-primary-muted hover:text-accent hover:border-accent transition-all duration-300"
+                  >
+                    <item.Icon className="w-4 h-4" />
+                  </a>
+                ))}
+              </div>
+
+              <h4 className="text-[11px] tracking-[3px] uppercase text-accent mb-3">
                 Sales Office
               </h4>
-              <p
-                className="text-sm leading-8"
-                style={{ color: "var(--color-text-on-primary-muted)" }}
-              >
+              <p className="text-xs text-on-primary-muted leading-6">
                 Open daily 09:00 – 18:00
                 <br />
-                Tel: 1775
+                Tel:{" "}
+                <a
+                  href="tel:1775"
+                  className="hover:text-accent transition-colors duration-300"
+                >
+                  1775
+                </a>
                 <br />
                 LINE: @assetfive
               </p>
@@ -106,20 +143,17 @@ export default function Footer({ contact }: { contact: ContactData }) {
       </div>
 
       {/* Bottom bar */}
-      <div className="py-4" style={{ background: "var(--color-primary)" }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 text-center">
-          <p
-            className="text-xs"
-            style={{ color: "var(--color-text-on-primary-muted)" }}
-          >
+      <div className="bg-primary py-4">
+        <div className="max-w-6xl mx-auto px-6 lg:px-10 text-center">
+          <p className="text-[11px] text-on-primary-muted">
             <Link
               href="/privacy"
-              className="hover:opacity-80 transition-opacity duration-300"
+              className="hover:text-accent transition-colors duration-300"
             >
               Privacy Policy
             </Link>
             <span className="mx-2">·</span>
-            <span>© 2026 Asset Five Public Company Limited.</span>
+            <span>© 2026 Asset Five Group Public Company Limited.</span>
           </p>
         </div>
       </div>

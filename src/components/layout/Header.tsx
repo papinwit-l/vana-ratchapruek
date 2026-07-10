@@ -1,13 +1,17 @@
+// components/layout/Header.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ThemeSwitcher } from "../ui/ThemeSwitcher";
 
-const NAV_ITEMS = [
+const NAV_LEFT = [
   { label: "CONCEPT", href: "#concept" },
   { label: "PROJECT INFO", href: "#project-info" },
   { label: "HOUSE TYPES", href: "#house-types" },
+];
+
+const NAV_RIGHT = [
   { label: "FACILITIES", href: "#facilities" },
   { label: "GALLERY", href: "#gallery" },
   { label: "LOCATION", href: "#location" },
@@ -46,11 +50,11 @@ export default function Header() {
           : "bg-transparent border-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 relative">
         <nav className="flex items-center justify-between h-20 lg:h-24">
           {/* Left nav */}
           <ul className="hidden lg:flex items-center gap-7">
-            {NAV_ITEMS.slice(0, 3).map((item) => (
+            {NAV_LEFT.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
@@ -81,46 +85,48 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Right nav + theme switcher */}
-          <div className="hidden lg:flex items-center gap-7">
-            {NAV_ITEMS.slice(3).map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`text-[11px] font-normal tracking-[0.15em] transition-colors duration-300 ${navTextClass}`}
-              >
-                {item.label}
-              </Link>
+          {/* Right nav */}
+          <ul className="hidden lg:flex items-center gap-7">
+            {NAV_RIGHT.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={`text-[11px] font-normal tracking-[0.15em] transition-colors duration-300 ${navTextClass}`}
+                >
+                  {item.label}
+                </Link>
+              </li>
             ))}
-            <ThemeSwitcher />
-          </div>
+          </ul>
 
-          {/* Mobile: theme switcher + hamburger */}
-          <div className="lg:hidden flex items-center gap-3">
-            <ThemeSwitcher />
-            <button
-              className="relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 cursor-pointer"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            >
-              <span
-                className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
-                  mobileOpen ? "rotate-45 translate-y-[7.5px]" : ""
-                }`}
-              />
-              <span
-                className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
-                  mobileOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
-                  mobileOpen ? "-rotate-45 -translate-y-[7.5px]" : ""
-                }`}
-              />
-            </button>
-          </div>
+          {/* Mobile hamburger */}
+          <button
+            className="lg:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 cursor-pointer"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          >
+            <span
+              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
+                mobileOpen ? "rotate-45 translate-y-[7.5px]" : ""
+              }`}
+            />
+            <span
+              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
+                mobileOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
+                mobileOpen ? "-rotate-45 -translate-y-[7.5px]" : ""
+              }`}
+            />
+          </button>
         </nav>
+      </div>
+      {/* Theme switcher — absolute positioned, outside nav flow */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:flex items-center gap-3 pr-6">
+        <div className="w-px h-5 bg-on-primary/20" />
+        <ThemeSwitcher />
       </div>
 
       {/* Mobile menu overlay */}
@@ -131,8 +137,8 @@ export default function Header() {
             : "opacity-0 pointer-events-none"
         }`}
       >
-        <ul className="flex flex-col items-center justify-center gap-8 py-16">
-          {NAV_ITEMS.map((item) => (
+        <ul className="flex flex-col items-center justify-center gap-8 py-16 bg-primary/95">
+          {[...NAV_LEFT, ...NAV_RIGHT].map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
@@ -143,6 +149,10 @@ export default function Header() {
               </Link>
             </li>
           ))}
+          {/* Theme switcher in mobile menu */}
+          <li className="pt-4 border-t border-accent-border">
+            <ThemeSwitcher />
+          </li>
         </ul>
       </div>
     </header>
