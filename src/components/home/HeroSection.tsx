@@ -23,12 +23,15 @@ type HeroData = {
 // Fallback if WP data isn't ready yet
 const FALLBACK_SLIDES: HeroSlide[] = [
   {
-    src: "/images/banner/banner-image-01.png",
+    src: "/images/banner/banner-image-01.webp",
     alt: "VANA Ratchapruek exterior",
   },
-  { src: "/images/banner/banner-image-02.png", alt: "VANA Ratchapruek garden" },
   {
-    src: "/images/banner/banner-image-03.png",
+    src: "/images/banner/banner-image-02.webp",
+    alt: "VANA Ratchapruek garden",
+  },
+  {
+    src: "/images/banner/banner-image-03.webp",
     alt: "VANA Ratchapruek interior",
   },
 ];

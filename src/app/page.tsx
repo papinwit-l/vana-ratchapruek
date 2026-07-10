@@ -56,7 +56,7 @@ export default async function HomePage() {
     <>
       <HeroSection
         data={{
-          slides: bannerSlides,
+          slides: [],
           title: "VANA",
           subtitle: "Asset Five Presents",
           tagline: "Balance of Urbanized Living",
@@ -72,7 +72,7 @@ export default async function HomePage() {
             'สุนทรียภาพใหม่ของที่อยู่อาศัย ที่ร่มรื่นและร่มเย็น ดั่งอาศัยอยู่ใน "วนา" ซึ่งเป็นคำภาษาไทย แปลว่า "ป่า" VANA บ้านที่ออกแบบโดยได้รับแรงบันดาลใจจากการอยู่อาศัยท่ามกลางพงไพรเพื่อตอบรับไลฟ์สไตล์คนเมืองให้อยู่สบาย หรูหราบนทำเลศักยภาพจาก A5 ให้การพักผ่อนของคุณและครอบครัวเป็นพื้นที่รีชาร์จร่างกายผ่อนคลาย และเติมความสุข เสมือนอยู่ท่ามกลางธรรมชาติ',
             'บ้านเดี่ยว 3 ชั้นรูปแบบใหม่บนทำเลใจกลางราชพฤกษ์ เชื่อมต่อชีวิตคนเมืองด้วยการเดินทางเข้าเมืองที่สะดวกสบาย ติดห้างสรรพสินค้าชื่อดังถึง 2 ห้าง และใกล้ชิดติดธรรมชาติด้วยต้นไม้ใหญ่มากมายทั่วทั้งโครงการ ให้ที่พักอาศัยของคุณร่มรื่น ดั่ง "วนา" พร้อมความสงบและเป็นส่วนตัวเพียง 43 ครอบครัว',
           ],
-          image: "/images/banner/banner-image-01.png",
+          image: "/images/banner/banner-image-01.webp",
         }}
       />
       <ProjectInfoSection
@@ -96,20 +96,26 @@ export default async function HomePage() {
         data={{
           images: [
             {
-              src: "/images/banner/banner-image-01.png",
+              src: "/images/banner/banner-image-01.webp",
               alt: "VANA exterior view",
             },
-            { src: "/images/banner/banner-image-02.png", alt: "VANA garden" },
-            { src: "/images/banner/banner-image-03.png", alt: "VANA interior" },
+            { src: "/images/banner/banner-image-02.webp", alt: "VANA garden" },
             {
-              src: "/images/banner/banner-image-01.png",
+              src: "/images/banner/banner-image-03.webp",
+              alt: "VANA interior",
+            },
+            {
+              src: "/images/banner/banner-image-01.webp",
               alt: "VANA pool area",
             },
             {
-              src: "/images/banner/banner-image-02.png",
+              src: "/images/banner/banner-image-02.webp",
               alt: "VANA clubhouse",
             },
-            { src: "/images/banner/banner-image-03.png", alt: "VANA entrance" },
+            {
+              src: "/images/banner/banner-image-03.webp",
+              alt: "VANA entrance",
+            },
           ],
         }}
       />

@@ -5,7 +5,7 @@ export const HOUSE_TYPES_DATA = {
     {
       name: "Type L",
       subtitle: "Luxury Collection",
-      image: "/images/banner/banner-image-01.png",
+      image: "/images/banner/banner-image-01.webp",
       specs: [
         { label: "เนื้อที่", value: "50–60 ตร.ว." },
         { label: "พื้นที่ใช้สอย", value: "210 ตร.ม." },
@@ -14,14 +14,14 @@ export const HOUSE_TYPES_DATA = {
         { label: "ที่จอดรถ", value: "2 คัน" },
       ],
       floors: [
-        { src: "/images/banner/banner-image-02.png", label: "1st Floor Plan" },
-        { src: "/images/banner/banner-image-03.png", label: "2nd Floor Plan" },
+        { src: "/images/banner/banner-image-02.webp", label: "1st Floor Plan" },
+        { src: "/images/banner/banner-image-03.webp", label: "2nd Floor Plan" },
       ],
     },
     {
       name: "Type M",
       subtitle: "Premium Collection",
-      image: "/images/banner/banner-image-02.png",
+      image: "/images/banner/banner-image-02.webp",
       specs: [
         { label: "เนื้อที่", value: "40–50 ตร.ว." },
         { label: "พื้นที่ใช้สอย", value: "180 ตร.ม." },
@@ -30,14 +30,14 @@ export const HOUSE_TYPES_DATA = {
         { label: "ที่จอดรถ", value: "2 คัน" },
       ],
       floors: [
-        { src: "/images/banner/banner-image-01.png", label: "1st Floor Plan" },
-        { src: "/images/banner/banner-image-03.png", label: "2nd Floor Plan" },
+        { src: "/images/banner/banner-image-01.webp", label: "1st Floor Plan" },
+        { src: "/images/banner/banner-image-03.webp", label: "2nd Floor Plan" },
       ],
     },
     {
       name: "Type S",
       subtitle: "Classic Collection",
-      image: "/images/banner/banner-image-03.png",
+      image: "/images/banner/banner-image-03.webp",
       specs: [
         { label: "เนื้อที่", value: "35–40 ตร.ว." },
         { label: "พื้นที่ใช้สอย", value: "155 ตร.ม." },
@@ -46,8 +46,8 @@ export const HOUSE_TYPES_DATA = {
         { label: "ที่จอดรถ", value: "2 คัน" },
       ],
       floors: [
-        { src: "/images/banner/banner-image-02.png", label: "1st Floor Plan" },
-        { src: "/images/banner/banner-image-01.png", label: "2nd Floor Plan" },
+        { src: "/images/banner/banner-image-02.webp", label: "1st Floor Plan" },
+        { src: "/images/banner/banner-image-01.webp", label: "2nd Floor Plan" },
       ],
     },
   ],
