@@ -55,7 +55,7 @@ export function ThemeSwitcher() {
   const panelRef = useRef<HTMLDivElement>(null);
 
   // Only show in development
-  if (process.env.NODE_ENV === "production") return null;
+  if (process.env.NEXT_PUBLIC_SHOW_THEME_SWITCHER !== "true") return null;
 
   // Close on click outside
   useEffect(() => {

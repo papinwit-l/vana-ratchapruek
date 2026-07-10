@@ -92,67 +92,40 @@ export default function HeroSection({ data }: { data: HeroData }) {
       ))}
 
       {/* ── Gradient overlay ── */}
-      <div className="hero-overlay absolute inset-0 z-20 pointer-events-none" />
+      <div className="hero-overlay-bottom absolute inset-0 z-20 pointer-events-none" />
 
       {/* ── Content ── */}
       <div className="relative z-30 h-full flex flex-col items-center justify-center text-center px-6 pt-20">
-        {/* Eyebrow */}
-        <p
-          className="text-[11px] tracking-[6px] uppercase mb-4"
-          style={{ color: "var(--color-accent)" }}
-        >
+        {/* Eyebrow — pill with subtle fill, NO shadow */}
+        <p className="text-[11px] font-semibold tracking-[6px] uppercase mb-6 text-accent border border-accent/30 bg-black/40 rounded-full px-6 py-2">
           {data?.subtitle || "Asset Five Presents"}
         </p>
 
         {/* Title */}
-        <h1
-          className="font-[family-name:var(--font-display)] text-[clamp(48px,8vw,88px)] font-light tracking-[6px] leading-none mb-2"
-          style={{ color: "var(--color-text-on-primary)" }}
-        >
+        <h1 className="font-display text-[clamp(48px,8vw,88px)] font-light tracking-[6px] leading-none mb-2 text-on-primary hero-text-shadow">
           {data?.title || "VANA"}
         </h1>
 
         {/* Subtitle */}
-        <p
-          className="text-[clamp(12px,2vw,16px)] tracking-[8px] uppercase mb-8"
-          style={{ color: "var(--color-accent-hover)" }}
-        >
+        <p className="text-[clamp(12px,2vw,16px)] font-semibold tracking-[8px] uppercase mb-8 text-accent-hover hero-text-shadow-sm">
           Ratchapruek — Westville
         </p>
 
         {/* Tagline */}
-        <p
-          className="font-[family-name:var(--font-display)] text-[clamp(16px,2.5vw,22px)] italic font-light mb-10"
-          style={{ color: "var(--color-text-on-primary-muted)" }}
-        >
+        <p className="font-display text-[clamp(16px,2.5vw,22px)] italic font-normal mb-10 text-on-primary-muted hero-text-shadow-sm">
           {data?.tagline || "Balance of Urbanized Living"}
         </p>
 
         {/* Price badge */}
         {data?.price && (
-          <div
-            className="inline-flex items-baseline gap-2 rounded-full px-8 py-3 mb-10"
-            style={{
-              background: "var(--color-accent-subtle)",
-              border: "1px solid var(--color-accent-border)",
-            }}
-          >
-            <span
-              className="text-[13px] tracking-[2px] uppercase"
-              style={{ color: "var(--color-accent)" }}
-            >
+          <div className="inline-flex items-baseline gap-2 rounded-full px-8 py-3 mb-10 bg-black/25 border border-accent-border backdrop-blur-sm">
+            <span className="text-[13px] tracking-[2px] uppercase text-accent">
               Starting from
             </span>
-            <span
-              className="font-[family-name:var(--font-display)] text-[28px] font-semibold"
-              style={{ color: "var(--color-text-on-primary)" }}
-            >
+            <span className="font-display text-[28px] font-semibold text-on-primary hero-text-shadow-sm">
               {data.price}
             </span>
-            <span
-              className="text-sm"
-              style={{ color: "var(--color-accent-hover)" }}
-            >
+            <span className="text-sm text-accent-hover">
               {data.price_unit || "MB*"}
             </span>
           </div>

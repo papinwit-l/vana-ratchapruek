@@ -62,9 +62,9 @@
   --color-text-muted: rgba(42, 42, 42, 0.7);
 
   /* Hero overlay gradient stops */
-  --color-overlay-start: rgba(27, 58, 45, 0.3);
-  --color-overlay-mid: rgba(27, 58, 45, 0.6);
-  --color-overlay-end: rgba(27, 58, 45, 0.95);
+  --color-overlay-start: rgba(27, 58, 45, 0.1); /* was 0.3 */
+  --color-overlay-mid: rgba(27, 58, 45, 0.25); /* was 0.6 */
+  --color-overlay-end: rgba(27, 58, 45, 0.6); /* was 0.95 */
 
   /* Cards on dark bg */
   --color-card-dark-bg: rgba(255, 255, 255, 0.04);
@@ -340,6 +340,17 @@ body {
   );
 }
 
+/* Hero overlay — bottom only (top 60% clear) */
+.hero-overlay-bottom {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 35%,
+    var(--color-overlay-mid) 65%,
+    var(--color-overlay-end) 100%
+  );
+}
+
 /* CTA button */
 .btn-cta {
   background-color: var(--color-accent);
@@ -411,4 +422,29 @@ body {
   width: 48px;
   height: 2px;
   background-color: var(--color-accent);
+}
+
+/* Hero text shadow — readable without heavy overlay */
+/* .hero-text-shadow {
+  text-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.6),
+    0 1px 4px rgba(0, 0, 0, 0.4);
+}
+.hero-text-shadow-sm {
+  text-shadow:
+    0 1px 8px rgba(0, 0, 0, 0.5),
+    0 1px 3px rgba(0, 0, 0, 0.3);
+} */
+
+/* Hero text shadow — stronger for busy backgrounds */
+.hero-text-shadow {
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.8),
+    0 4px 40px rgba(0, 0, 0, 0.5),
+    0 1px 3px rgba(0, 0, 0, 0.6);
+}
+.hero-text-shadow-sm {
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.7),
+    0 1px 4px rgba(0, 0, 0, 0.5);
 }
