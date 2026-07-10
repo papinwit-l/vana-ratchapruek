@@ -23,47 +23,47 @@ export default function LeadFormSection() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!accepted) {
-      setErrorMsg("Please accept the Privacy Policy.");
-      setStatus("error");
-      return;
-    }
+    // if (!accepted) {
+    //   setErrorMsg("Please accept the Privacy Policy.");
+    //   setStatus("error");
+    //   return;
+    // }
 
-    setStatus("submitting");
-    setErrorMsg("");
+    // setStatus("submitting");
+    // setErrorMsg("");
 
-    const form = e.currentTarget;
-    const data = {
-      firstName: (form.elements.namedItem("firstName") as HTMLInputElement)
-        .value,
-      lastName: (form.elements.namedItem("lastName") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      mobile: (form.elements.namedItem("mobile") as HTMLInputElement).value,
-      lineId: (form.elements.namedItem("lineId") as HTMLInputElement).value,
-      houseType: (form.elements.namedItem("houseType") as HTMLSelectElement)
-        .value,
-      company: (form.elements.namedItem("company") as HTMLInputElement).value,
-    };
+    // const form = e.currentTarget;
+    // const data = {
+    //   firstName: (form.elements.namedItem("firstName") as HTMLInputElement)
+    //     .value,
+    //   lastName: (form.elements.namedItem("lastName") as HTMLInputElement).value,
+    //   email: (form.elements.namedItem("email") as HTMLInputElement).value,
+    //   mobile: (form.elements.namedItem("mobile") as HTMLInputElement).value,
+    //   lineId: (form.elements.namedItem("lineId") as HTMLInputElement).value,
+    //   houseType: (form.elements.namedItem("houseType") as HTMLSelectElement)
+    //     .value,
+    //   company: (form.elements.namedItem("company") as HTMLInputElement).value,
+    // };
 
-    try {
-      const res = await fetch("/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+    // try {
+    //   const res = await fetch("/api/register", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(data),
+    //   });
 
-      if (!res.ok) {
-        const json = await res.json();
-        throw new Error(json.error || "Something went wrong.");
-      }
+    //   if (!res.ok) {
+    //     const json = await res.json();
+    //     throw new Error(json.error || "Something went wrong.");
+    //   }
 
-      setStatus("success");
-      form.reset();
-      setAccepted(false);
-    } catch (err) {
-      setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
-      setStatus("error");
-    }
+    //   setStatus("success");
+    //   form.reset();
+    //   setAccepted(false);
+    // } catch (err) {
+    //   setErrorMsg(err instanceof Error ? err.message : "Something went wrong.");
+    //   setStatus("error");
+    // }
   };
 
   return (
