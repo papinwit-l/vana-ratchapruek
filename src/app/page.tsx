@@ -25,6 +25,7 @@ import { Baby, Cable, Dumbbell, Sofa, TreePine, Waves } from "lucide-react";
 import { CONTACT_DATA, LOCATION_DATA } from "@/data/location";
 import { HOUSE_TYPES_DATA } from "@/data/house-type";
 import { FACILITIES_DATA } from "@/data/facilities";
+import { GALLERY_DATA } from "@/data/gallery";
 
 // const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -92,33 +93,7 @@ export default async function HomePage() {
       />
       <HouseTypeSection data={HOUSE_TYPES_DATA} />
       <FacilitiesSection data={FACILITIES_DATA} />
-      <GallerySection
-        data={{
-          images: [
-            {
-              src: "/images/banner/banner-image-01.webp",
-              alt: "VANA exterior view",
-            },
-            { src: "/images/banner/banner-image-02.webp", alt: "VANA garden" },
-            {
-              src: "/images/banner/banner-image-03.webp",
-              alt: "VANA interior",
-            },
-            {
-              src: "/images/banner/banner-image-01.webp",
-              alt: "VANA pool area",
-            },
-            {
-              src: "/images/banner/banner-image-02.webp",
-              alt: "VANA clubhouse",
-            },
-            {
-              src: "/images/banner/banner-image-03.webp",
-              alt: "VANA entrance",
-            },
-          ],
-        }}
-      />
+      <GallerySection data={GALLERY_DATA} />
       <LocationSection location={LOCATION_DATA} contact={CONTACT_DATA} />
     </>
   );
