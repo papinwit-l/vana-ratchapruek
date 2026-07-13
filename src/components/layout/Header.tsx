@@ -4,6 +4,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ThemeSwitcher } from "../ui/ThemeSwitcher";
+import { FontSwitcher } from "../ui/FontSwitcher";
 
 const NAV_LEFT = [
   { label: "CONCEPT", href: "#concept" },
@@ -125,6 +126,7 @@ export default function Header() {
       </div>
       {/* Theme switcher — absolute positioned, outside nav flow */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:flex items-center gap-3 pr-6">
+        <FontSwitcher />
         <div className="w-px h-5 bg-on-primary/20" />
         <ThemeSwitcher />
       </div>

@@ -7,6 +7,8 @@ import { getContact } from "@/lib/wordpress";
 import { cookies } from "next/headers";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Theme, THEMES } from "@/config/theme";
+import { FONT_PAIRS, FontPairId } from "@/config/fonts";
+import { FontProvider } from "@/components/font-provider";
 
 // ─── Fonts ───
 // --font-display → used by .font-display, .section-heading in global.css
@@ -73,6 +75,12 @@ export default async function RootLayout({
   const cookieStore = await cookies();
   const savedTheme = cookieStore.get("theme")?.value;
 
+  const savedFont = cookieStore.get("fontPair")?.value;
+  const activeFont: FontPairId =
+    savedFont && FONT_PAIRS.some((p) => p.id === savedFont)
+      ? (savedFont as FontPairId)
+      : "cormorant-prompt";
+
   // This will now work perfectly because THEMES is a real array on the server
   const activeTheme: Theme =
     savedTheme && (THEMES as readonly string[]).includes(savedTheme)
@@ -85,12 +93,19 @@ export default async function RootLayout({
       data-theme={activeTheme}
       className={`${acciaPiano.variable} ${instrumentSans.variable} ${myriadPro.variable}`}
     >
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@300;400;600&family=Sarabun:wght@300;400;600&family=Prompt:wght@300;400;600&family=Bai+Jamjuree:wght@300;400;600&family=IBM+Plex+Sans+Thai:wght@300;400;600&family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:wght@300;400;600&family=Kanit:wght@300;400;600&family=Noto+Sans+Thai:wght@300;400;600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="min-h-screen flex flex-col antialiased">
         <ThemeProvider initialTheme={activeTheme}>
-          <Header />
-          <main className="flex-1">{children}</main>
-          {/* <Footer contact={contactData} /> */}
-          <Footer />
+          <FontProvider initialFont={activeFont}>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </FontProvider>
         </ThemeProvider>
       </body>
     </html>
