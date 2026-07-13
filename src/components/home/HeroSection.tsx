@@ -199,7 +199,7 @@ export default function HeroSection({ data }: { data: HeroData }) {
       </div>
 
       {/* ── Scroll indicator ── */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-30 flex-col items-center gap-2 hidden lg:flex">
+      <div className="scroll-indicator absolute bottom-24 left-1/2 -translate-x-1/2 z-30 flex-col items-center gap-2 hidden lg:flex">
         <span className="text-[10px] tracking-[3px] text-white/30">SCROLL</span>
         <div
           className="w-px h-10"
