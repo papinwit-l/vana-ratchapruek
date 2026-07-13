@@ -236,36 +236,144 @@ export default function LocationSection({
             <p className={`section-label text-center mb-8 reveal ${nv}`}>
               Nearby Highlights
             </p>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+
+            {/* Desktop: grid */}
+            <div className="hidden lg:grid lg:grid-cols-4 gap-6">
               {location.nearby.map((cat, i) => (
-                <div
-                  key={cat.category}
-                  className={`reveal reveal-delay-${Math.min(i + 1, 4)} ${nv}`}
-                >
-                  <h4 className="font-display text-base text-accent font-light mb-4 pb-3 border-b border-accent-border">
-                    {cat.category}
-                  </h4>
-                  <div className="space-y-3">
-                    {cat.places.map((place) => (
-                      <div
-                        key={place.name}
-                        className="flex items-baseline justify-between gap-3"
-                      >
-                        <span className="text-[13px] text-on-primary-muted leading-snug">
-                          {place.name}
-                        </span>
-                        <span className="text-xs text-accent whitespace-nowrap">
-                          {place.distance}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <NearbyCard key={cat.category} cat={cat} i={i} nv={nv} />
               ))}
+            </div>
+
+            {/* Mobile: horizontal slider */}
+            <div className="lg:hidden">
+              <NearbySlider categories={location.nearby} />
             </div>
           </div>
         )}
       </div>
     </section>
+  );
+}
+
+function NearbyCard({
+  cat,
+  i,
+  nv,
+}: {
+  cat: NearbyCategory;
+  i: number;
+  nv: string;
+}) {
+  return (
+    <div className={`reveal reveal-delay-${Math.min(i + 1, 4)} ${nv}`}>
+      <h4 className="font-display text-base text-accent font-light mb-4 pb-3 border-b border-accent-border">
+        {cat.category}
+      </h4>
+      <div className="space-y-3">
+        {cat.places.map((place) => (
+          <div
+            key={place.name}
+            className="flex items-baseline justify-between gap-3"
+          >
+            <span className="text-[13px] text-on-primary-muted leading-snug">
+              {place.name}
+            </span>
+            <span className="text-xs text-accent whitespace-nowrap">
+              {place.distance}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function NearbySlider({ categories }: { categories: NearbyCategory[] }) {
+  const [active, setActive] = useState(0);
+  const total = categories.length;
+
+  const prev = () => setActive((i) => (i === 0 ? total - 1 : i - 1));
+  const next = () => setActive((i) => (i === total - 1 ? 0 : i + 1));
+
+  return (
+    <div>
+      {/* Header: arrow — category name — arrow */}
+      <div className="flex items-center justify-between mb-6">
+        <button
+          onClick={prev}
+          aria-label="Previous category"
+          className="w-9 h-9 rounded-full border border-accent-border flex items-center justify-center text-on-primary-muted hover:text-accent hover:border-accent transition-colors cursor-pointer"
+        >
+          <svg
+            width="12"
+            height="20"
+            viewBox="0 0 12 20"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          >
+            <path d="M10 2L2 10L10 18" />
+          </svg>
+        </button>
+
+        <div className="text-center">
+          <h4 className="font-display text-base text-accent font-light">
+            {categories[active].category}
+          </h4>
+          <p className="text-[10px] text-on-primary-muted mt-1">
+            {active + 1} / {total}
+          </p>
+        </div>
+
+        <button
+          onClick={next}
+          aria-label="Next category"
+          className="w-9 h-9 rounded-full border border-accent-border flex items-center justify-center text-on-primary-muted hover:text-accent hover:border-accent transition-colors cursor-pointer"
+        >
+          <svg
+            width="12"
+            height="20"
+            viewBox="0 0 12 20"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          >
+            <path d="M2 2L10 10L2 18" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Places list */}
+      <div className="space-y-3">
+        {categories[active].places.map((place) => (
+          <div
+            key={place.name}
+            className="flex items-baseline justify-between gap-3"
+          >
+            <span className="text-[13px] text-on-primary-muted leading-snug">
+              {place.name}
+            </span>
+            <span className="text-xs text-accent whitespace-nowrap">
+              {place.distance}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Dots */}
+      <div className="flex justify-center gap-2 mt-6">
+        {categories.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+              i === active ? "w-6 bg-accent" : "w-3 bg-on-primary/20"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
