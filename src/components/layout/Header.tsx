@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ThemeSwitcher } from "../ui/ThemeSwitcher";
 import { FontSwitcher } from "../ui/FontSwitcher";
+import { SettingsModal } from "../ui/SettingsModal";
 
 const NAV_LEFT = [
   { label: "CONCEPT", href: "#concept" },
@@ -101,31 +102,28 @@ export default function Header() {
           </ul>
 
           {/* Mobile hamburger */}
-          <button
-            className="lg:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 cursor-pointer"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          >
-            <span
-              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
-                mobileOpen ? "rotate-45 translate-y-[7.5px]" : ""
-              }`}
-            />
-            <span
-              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
-                mobileOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${
-                mobileOpen ? "-rotate-45 -translate-y-[7.5px]" : ""
-              }`}
-            />
-          </button>
+          <div className="lg:hidden flex items-center gap-2">
+            <SettingsModal />
+            <button
+              className="relative w-8 h-8 flex flex-col items-center justify-center gap-1.5 cursor-pointer"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
+              <span
+                className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-[7.5px]" : ""}`}
+              />
+              <span
+                className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`}
+              />
+              <span
+                className={`block w-6 h-[1.5px] bg-on-primary transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-[7.5px]" : ""}`}
+              />
+            </button>
+          </div>
         </nav>
       </div>
       {/* Theme switcher — absolute positioned, outside nav flow */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:flex items-center gap-3 pr-6">
+      <div className="absolute right-0 top-0 hidden lg:flex items-center gap-3 pr-6">
         <FontSwitcher />
         <div className="w-px h-5 bg-on-primary/20" />
         <ThemeSwitcher />
@@ -151,10 +149,6 @@ export default function Header() {
               </Link>
             </li>
           ))}
-          {/* Theme switcher in mobile menu */}
-          <li className="pt-4 border-t border-accent-border">
-            <ThemeSwitcher />
-          </li>
         </ul>
       </div>
     </header>

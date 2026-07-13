@@ -107,6 +107,9 @@ export default async function RootLayout({
             <Footer />
           </FontProvider>
         </ThemeProvider>
+
+        {/* Portal root — outside flex flow */}
+        <div id="modal-root" />
       </body>
     </html>
   );
