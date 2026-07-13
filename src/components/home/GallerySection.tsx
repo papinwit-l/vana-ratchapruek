@@ -126,7 +126,9 @@ export default function GallerySection({ data }: { data: GalleryData }) {
             className="shrink-0 w-[85vw] sm:w-[70vw] md:w-[55vw] lg:w-[45vw] snap-start cursor-pointer group"
             onClick={() => openModal(i)}
           >
-            <div className="relative aspect-[16/10] overflow-hidden">
+            <div
+              className={`relative aspect-[16/10] overflow-hidden ${current == i && "border-accent border-2"}`}
+            >
               <Image
                 src={img.src}
                 alt={img.alt}
