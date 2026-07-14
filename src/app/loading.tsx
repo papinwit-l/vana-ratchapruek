@@ -5,7 +5,7 @@ import LoadingProgressBar from "@/components/ui/loading-animation/LoadingProgres
 import LoadingWave from "@/components/ui/loading-animation/LoadingWave";
 
 export default function Loading() {
-  return;
-  // return <LoadingProgressBar />;
+  // return;
+  return <LoadingProgressBar />;
   // return <LoadingWave />;
 }

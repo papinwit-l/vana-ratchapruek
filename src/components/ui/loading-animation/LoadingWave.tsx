@@ -1,26 +1,26 @@
 "use client";
 
-import FullLogo from "../FullLogo";
+import VanaFullLogo from "../VanaFullLogo";
 
 export default function LoadingWave() {
   return (
-    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-accent">
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-primary">
       {/* Logo container */}
-      <div className="relative w-[280px] h-[92px] md:w-[360px] md:h-[118px]">
+      <div className="relative w-[320px] md:w-[420px] aspect-[4/3]">
         {/* Bottom layer: ghost outline */}
         <div className="absolute inset-0 opacity-15">
-          <FullLogo className="w-full h-full text-brown-300" />
+          <VanaFullLogo className="w-full h-full text-accent" />
         </div>
 
         {/* Top layer: wave fill */}
         <div className="absolute inset-0 loading-wave">
-          <FullLogo className="w-full h-full text-warm-300" />
+          <VanaFullLogo className="w-full h-full text-on-primary" />
         </div>
       </div>
 
       {/* Thin progress bar */}
-      <div className="mt-8 w-[120px] h-[1px] bg-brown-400 overflow-hidden rounded-full">
-        <div className="h-full bg-warm-300 loading-bar" />
+      <div className="mt-8 w-[120px] h-[2px] bg-accent/15 overflow-hidden rounded-full">
+        <div className="h-full bg-on-primary loading-bar" />
       </div>
 
       <style>{`
