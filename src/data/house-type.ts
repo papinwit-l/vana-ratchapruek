@@ -14,9 +14,9 @@ export const HOUSE_TYPES_DATA = {
         { label: "ที่จอดรถ", value: "2 คัน" },
       ],
       floors: [
-        { src: "/images/unit/type-l-f1.webp", label: "1st Floor Plan" },
-        { src: "/images/unit/type-l-f2.webp", label: "2nd Floor Plan" },
-        { src: "/images/unit/type-l-f3.webp", label: "3rd Floor Plan" },
+        { src: "/images/unit/type-l-f1.png", label: "1st Floor Plan" },
+        { src: "/images/unit/type-l-f2.png", label: "2nd Floor Plan" },
+        { src: "/images/unit/type-l-f3.png", label: "3rd Floor Plan" },
       ],
     },
     {
@@ -31,9 +31,9 @@ export const HOUSE_TYPES_DATA = {
         { label: "ที่จอดรถ", value: "2 คัน" },
       ],
       floors: [
-        { src: "/images/unit/type-m-f1.webp", label: "1st Floor Plan" },
-        { src: "/images/unit/type-m-f2.webp", label: "2nd Floor Plan" },
-        { src: "/images/unit/type-m-f3.webp", label: "3rd Floor Plan" },
+        { src: "/images/unit/type-m-f1.png", label: "1st Floor Plan" },
+        { src: "/images/unit/type-m-f2.png", label: "2nd Floor Plan" },
+        { src: "/images/unit/type-m-f3.png", label: "3rd Floor Plan" },
       ],
     },
     {
@@ -48,9 +48,9 @@ export const HOUSE_TYPES_DATA = {
         { label: "ที่จอดรถ", value: "2 คัน" },
       ],
       floors: [
-        { src: "/images/unit/type-s-f1.webp", label: "1st Floor Plan" },
-        { src: "/images/unit/type-s-f2.webp", label: "2nd Floor Plan" },
-        { src: "/images/unit/type-s-f3.webp", label: "3rd Floor Plan" },
+        { src: "/images/unit/type-s-f1.png", label: "1st Floor Plan" },
+        { src: "/images/unit/type-s-f2.png", label: "2nd Floor Plan" },
+        { src: "/images/unit/type-s-f3.png", label: "3rd Floor Plan" },
       ],
     },
   ],
