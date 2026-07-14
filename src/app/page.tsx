@@ -55,9 +55,21 @@ export default async function HomePage() {
   // console.log(aboutData);
   return (
     <>
+      {/* <HeroSection
+        data={{
+          slides: [],
+          title: "VANA",
+          subtitle: "Asset Five Presents",
+          tagline: "Balance of Urbanized Living",
+          price: "19.9",
+          price_unit: "MB*",
+        }}
+      /> */}
       <HeroSection
         data={{
           slides: [],
+          video: "/videos/banner-hero.mp4",
+          // videoWebm: "/videos/banner-hero.webm",  // add when you have it
           title: "VANA",
           subtitle: "Asset Five Presents",
           tagline: "Balance of Urbanized Living",

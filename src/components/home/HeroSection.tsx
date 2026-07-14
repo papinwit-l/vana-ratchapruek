@@ -13,6 +13,8 @@ type HeroSlide = {
 
 type HeroData = {
   slides: HeroSlide[];
+  video?: string;
+  videoWebm?: string;
   title?: string;
   subtitle?: string;
   tagline?: string;
@@ -20,7 +22,6 @@ type HeroData = {
   price_unit?: string;
 };
 
-// Fallback if WP data isn't ready yet
 const FALLBACK_SLIDES: HeroSlide[] = [
   {
     src: "/images/banner/banner-image-01.webp",
@@ -70,56 +71,97 @@ export default function HeroSection({ data }: { data: HeroData }) {
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const hasVideo = data?.video;
+
   return (
     <section
       id="hero"
       className="relative w-full h-dvh min-h-[600px] overflow-hidden"
     >
-      {/* ── Slides ── */}
-      {slides.map((slide, index) => (
-        <div
-          key={slide.src}
-          className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-            index === current ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
+      {/* ── Desktop: Video background ── */}
+      {hasVideo && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0 hidden lg:block"
+          poster={slides[0]?.src}
         >
-          <Image
-            src={slide.src}
-            alt={slide.alt}
-            fill
-            className="object-cover"
-            priority={index === 0}
-            sizes="100vw"
-          />
+          {data.videoWebm && <source src={data.videoWebm} type="video/webm" />}
+          <source src={data.video} type="video/mp4" />
+        </video>
+      )}
+
+      {/* ── Desktop: Image fallback if no video ── */}
+      {!hasVideo && (
+        <div className="hidden lg:block">
+          {slides.map((slide, index) => (
+            <div
+              key={slide.src}
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                index === current ? "opacity-100 z-10" : "opacity-0 z-0"
+              }`}
+            >
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                className="object-cover"
+                priority={index === 0}
+                sizes="100vw"
+              />
+            </div>
+          ))}
         </div>
-      ))}
+      )}
+
+      {/* ── Mobile: Image slider (always) ── */}
+      <div className={hasVideo ? "lg:hidden" : "lg:hidden"}>
+        {slides.map((slide, index) => (
+          <div
+            key={`mobile-${slide.src}`}
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+              index === current ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
+          >
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              className="object-cover"
+              priority={index === 0}
+              sizes="100vw"
+            />
+          </div>
+        ))}
+      </div>
 
       {/* ── Gradient overlay ── */}
-      <div className="hero-overlay-bottom absolute inset-0 z-20 pointer-events-none" />
+      <div
+        className={`${hasVideo ? "lg:hidden" : "lg:hidden"} hero-overlay-bottom absolute inset-0 z-20 pointer-events-none`}
+      />
 
       {/* ── Content ── */}
-      <div className="relative z-30 h-full flex flex-col items-center justify-center text-center px-6 pt-20">
-        {/* Eyebrow — pill with subtle fill, NO shadow */}
+      <div
+        className={`${hasVideo ? "lg:hidden" : "lg:hidden"} relative z-30 h-full flex flex-col items-center justify-center text-center px-6 pt-20`}
+      >
         <p className="text-[11px] font-semibold tracking-[6px] uppercase mb-6 text-accent border border-accent/30 bg-black/40 rounded-full px-6 py-2">
           {data?.subtitle || "Asset Five Presents"}
         </p>
 
-        {/* Title */}
         <h1 className="font-display text-[clamp(48px,8vw,88px)] font-light tracking-[6px] leading-none mb-2 text-on-primary hero-text-shadow">
           {data?.title || "VANA"}
         </h1>
 
-        {/* Subtitle */}
         <p className="text-[clamp(12px,2vw,16px)] font-semibold tracking-[8px] uppercase mb-8 text-accent-hover hero-text-shadow-sm">
           Ratchapruek — Westville
         </p>
 
-        {/* Tagline */}
         <p className="font-display text-[clamp(16px,2.5vw,22px)] italic font-normal mb-10 text-on-primary-muted hero-text-shadow-sm">
           {data?.tagline || "Balance of Urbanized Living"}
         </p>
 
-        {/* Price badge */}
         {data?.price && (
           <div className="inline-flex items-baseline gap-2 rounded-full px-8 py-3 mb-10 bg-black/25 border border-accent-border backdrop-blur-sm">
             <span className="text-[13px] tracking-[2px] uppercase text-accent">
@@ -134,53 +176,56 @@ export default function HeroSection({ data }: { data: HeroData }) {
           </div>
         )}
 
-        {/* CTA */}
         <button onClick={scrollToForm} className="btn-cta">
           Register Interest
         </button>
       </div>
 
-      {/* ── Arrows ── */}
-      <button
-        onClick={prev}
-        aria-label="Previous slide"
-        className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center text-white/60 hover:text-white transition-colors cursor-pointer"
-      >
-        <svg
-          width="16"
-          height="28"
-          viewBox="0 0 24 40"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          className="lg:w-5 lg:h-8"
+      {/* ── Arrows (mobile only, or desktop without video) ── */}
+      <div className={hasVideo ? "lg:hidden" : ""}>
+        <button
+          onClick={prev}
+          aria-label="Previous slide"
+          className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center text-white/60 hover:text-white transition-colors cursor-pointer"
         >
-          <path d="M20 2L4 20L20 38" />
-        </svg>
-      </button>
+          <svg
+            width="16"
+            height="28"
+            viewBox="0 0 24 40"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            className="lg:w-5 lg:h-8"
+          >
+            <path d="M20 2L4 20L20 38" />
+          </svg>
+        </button>
 
-      <button
-        onClick={next}
-        aria-label="Next slide"
-        className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center text-white/60 hover:text-white transition-colors cursor-pointer"
-      >
-        <svg
-          width="16"
-          height="28"
-          viewBox="0 0 24 40"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          className="lg:w-5 lg:h-8"
+        <button
+          onClick={next}
+          aria-label="Next slide"
+          className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center text-white/60 hover:text-white transition-colors cursor-pointer"
         >
-          <path d="M4 2L20 20L4 38" />
-        </svg>
-      </button>
+          <svg
+            width="16"
+            height="28"
+            viewBox="0 0 24 40"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            className="lg:w-5 lg:h-8"
+          >
+            <path d="M4 2L20 20L4 38" />
+          </svg>
+        </button>
+      </div>
 
-      {/* ── Dots ── */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3">
+      {/* ── Dots (mobile only, or desktop without video) ── */}
+      <div
+        className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-3 ${hasVideo ? "lg:hidden" : ""}`}
+      >
         {slides.map((_, index) => (
           <button
             key={index}
@@ -199,7 +244,9 @@ export default function HeroSection({ data }: { data: HeroData }) {
       </div>
 
       {/* ── Scroll indicator ── */}
-      <div className="scroll-indicator absolute bottom-24 left-1/2 -translate-x-1/2 z-30 flex-col items-center gap-2 hidden lg:flex">
+      <div
+        className={`${hasVideo ? "lg:hidden" : "lg:hidden"} scroll-indicator absolute bottom-24 left-1/2 -translate-x-1/2 z-30 flex-col items-center gap-2 hidden lg:flex`}
+      >
         <span className="text-[10px] tracking-[3px] text-white/30">SCROLL</span>
         <div
           className="w-px h-10"
