@@ -3,6 +3,7 @@
 
 import Image from "next/image";
 import useScrollReveal from "@/hooks/useScrollReveal";
+import VanaLogo from "../ui/VanaLogo";
 
 type ConceptData = {
   heading: string[];

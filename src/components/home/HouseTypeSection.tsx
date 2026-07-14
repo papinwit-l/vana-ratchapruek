@@ -29,6 +29,7 @@ type HouseTypeData = {
 
 export default function HouseTypeSection({ data }: { data: HouseTypeData }) {
   const [active, setActive] = useState(0);
+  const [activeFloor, setActiveFloor] = useState(0);
   const { ref: headingRef, isVisible: headingVisible } = useScrollReveal();
   const { ref: contentRef, isVisible: contentVisible } = useScrollReveal();
 
@@ -37,6 +38,12 @@ export default function HouseTypeSection({ data }: { data: HouseTypeData }) {
 
   const type = data.types[active];
   if (!type) return null;
+
+  // Reset floor when switching house type
+  const handleTypeChange = (index: number) => {
+    setActive(index);
+    setActiveFloor(0);
+  };
 
   return (
     <section id="house-types" className="bg-surface py-14 lg:py-28">
@@ -62,7 +69,7 @@ export default function HouseTypeSection({ data }: { data: HouseTypeData }) {
           {data.types.map((t, i) => (
             <button
               key={t.name}
-              onClick={() => setActive(i)}
+              onClick={() => handleTypeChange(i)}
               className={`px-6 lg:px-10 py-3 text-[12px] font-semibold tracking-[2px] uppercase transition-all duration-300 cursor-pointer border ${
                 active === i
                   ? "bg-primary text-accent border-primary"
@@ -122,33 +129,89 @@ export default function HouseTypeSection({ data }: { data: HouseTypeData }) {
 
           {/* Floor plans */}
           {type.floors.length > 0 && (
-            <div>
-              <p
-                className={`text-[11px] tracking-[4px] uppercase text-muted text-center mb-6 reveal reveal-delay-2 ${cv}`}
-              >
+            <div className={`reveal reveal-delay-2 ${cv}`}>
+              <p className="text-lg tracking-wide text-muted text-center mb-6">
                 Floor Plans
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10">
-                {type.floors.map((floor, i) => (
-                  <div
-                    key={floor.label}
-                    className={`reveal reveal-delay-${i + 3} ${cv}`}
-                  >
-                    <div className="relative aspect-[4/3] bg-surface-white">
-                      <Image
-                        src={floor.src}
-                        alt={floor.label}
-                        fill
-                        className="object-contain"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                    </div>
-                    <p className="text-sm text-text-muted text-center mt-3">
-                      {floor.label}
-                    </p>
-                  </div>
-                ))}
+
+              <div className="relative">
+                {/* Floor plan image */}
+                <div className="relative aspect-[16/9] bg-surface-white">
+                  <Image
+                    src={type.floors[activeFloor].src}
+                    alt={type.floors[activeFloor].label}
+                    fill
+                    className="object-cover translate-y-[10%]"
+                    sizes="(max-width: 768px) 100vw, 80vw"
+                  />
+                </div>
+
+                {/* Arrows */}
+                {type.floors.length > 1 && (
+                  <>
+                    <button
+                      onClick={() =>
+                        setActiveFloor((i) =>
+                          i === 0 ? type.floors.length - 1 : i - 1,
+                        )
+                      }
+                      aria-label="Previous floor plan"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-primary/80 flex items-center justify-center text-on-primary hover:bg-primary transition-colors cursor-pointer"
+                    >
+                      <svg
+                        width="12"
+                        height="20"
+                        viewBox="0 0 12 20"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      >
+                        <path d="M10 2L2 10L10 18" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() =>
+                        setActiveFloor((i) =>
+                          i === type.floors.length - 1 ? 0 : i + 1,
+                        )
+                      }
+                      aria-label="Next floor plan"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-primary/80 flex items-center justify-center text-on-primary hover:bg-primary transition-colors cursor-pointer"
+                    >
+                      <svg
+                        width="12"
+                        height="20"
+                        viewBox="0 0 12 20"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      >
+                        <path d="M2 2L10 10L2 18" />
+                      </svg>
+                    </button>
+                  </>
+                )}
               </div>
+
+              {/* Label + dots */}
+              <p className="text-sm text-text-muted text-center mt-3">
+                {type.floors[activeFloor].label}
+              </p>
+              {type.floors.length > 1 && (
+                <div className="flex justify-center gap-2 mt-3">
+                  {type.floors.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveFloor(i)}
+                      className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                        i === activeFloor ? "w-6 bg-accent" : "w-3 bg-text/20"
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>

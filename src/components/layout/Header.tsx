@@ -6,6 +6,8 @@ import Link from "next/link";
 import { ThemeSwitcher } from "../ui/ThemeSwitcher";
 import { FontSwitcher } from "../ui/FontSwitcher";
 import { SettingsModal } from "../ui/SettingsModal";
+import VanaFullLogo from "../ui/VanaFullLogo";
+import VanaLogo from "../ui/VanaLogo";
 
 const NAV_LEFT = [
   { label: "CONCEPT", href: "#concept" },
@@ -74,7 +76,9 @@ export default function Header() {
             className="flex items-center gap-3 lg:absolute lg:left-1/2 lg:-translate-x-1/2 h-full"
             onClick={handleNavClick}
           >
-            <div className="w-9 h-9 rounded-full flex items-center justify-center font-display text-base font-bold bg-gradient-to-br from-accent to-accent-hover text-primary">
+            <VanaFullLogo className="h-16 text-on-primary" />
+            {/* <VanaLogo className="h-16 text-on-primary" /> */}
+            {/* <div className="w-9 h-9 rounded-full flex items-center justify-center font-display text-base font-bold bg-gradient-to-br from-accent to-accent-hover text-primary">
               V
             </div>
             <div className="flex flex-col">
@@ -84,7 +88,7 @@ export default function Header() {
               <span className="text-[9px] tracking-[2px] uppercase text-accent">
                 RATCHAPRUEK
               </span>
-            </div>
+            </div> */}
           </Link>
 
           {/* Right nav */}

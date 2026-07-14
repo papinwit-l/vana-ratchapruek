@@ -1,6 +1,7 @@
 // components/layout/Footer.tsx
 import Link from "next/link";
 import { FacebookIcon, InstagramIcon, LineIcon } from "../ui/SocialMediaIcon";
+import VanaFullLogo from "../ui/VanaFullLogo";
 
 const NAV_LINKS = [
   { label: "HOME", href: "#hero" },
@@ -46,12 +47,13 @@ export default function Footer() {
               href="#hero"
               className="inline-flex flex-col items-start gap-0 mb-4"
             >
-              <span className="font-display text-2xl tracking-[4px] text-on-primary">
+              <VanaFullLogo className="h-28 text-on-primary" />
+              {/* <span className="font-display text-2xl tracking-[4px] text-on-primary">
                 VANA
               </span>
               <span className="text-[10px] tracking-[2px] uppercase text-accent">
                 Ratchapruek — Westville
-              </span>
+              </span> */}
             </Link>
             <p className="text-xs tracking-wide text-on-primary-muted mt-2 max-w-lg">
               Asset Five Group Public Company Limited
