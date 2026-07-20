@@ -13,29 +13,35 @@ import { FontProvider } from "@/components/font-provider";
 // ─── Fonts ───
 // --font-display → used by .font-display, .section-heading in global.css
 // --font-body   → used by body, .btn-cta, .input-underline in global.css
-const acciaPiano = localFont({
-  src: [
-    { path: "../../public/fonts/AcciaPiano-Light.ttf", weight: "300" },
-    { path: "../../public/fonts/AcciaPiano-Regular.ttf", weight: "400" },
-    { path: "../../public/fonts/AcciaPiano-Medium.ttf", weight: "500" },
-  ],
-  variable: "--font-display",
-  display: "swap",
-});
+// const acciaPiano = localFont({
+//   src: [
+//     { path: "../../public/fonts/AcciaPiano-Light.ttf", weight: "300" },
+//     { path: "../../public/fonts/AcciaPiano-Regular.ttf", weight: "400" },
+//     { path: "../../public/fonts/AcciaPiano-Medium.ttf", weight: "500" },
+//   ],
+//   variable: "--font-display",
+//   display: "swap",
+// });
 
-const instrumentSans = localFont({
-  src: [
-    { path: "../../public/fonts/InstrumentSans-Regular.ttf", weight: "400" },
-    { path: "../../public/fonts/InstrumentSans-SemiBold.ttf", weight: "600" },
-    { path: "../../public/fonts/InstrumentSans-Bold.ttf", weight: "700" },
-  ],
-  variable: "--font-body",
-  display: "swap",
-});
+// const instrumentSans = localFont({
+//   src: [
+//     { path: "../../public/fonts/InstrumentSans-Regular.ttf", weight: "400" },
+//     { path: "../../public/fonts/InstrumentSans-SemiBold.ttf", weight: "600" },
+//     { path: "../../public/fonts/InstrumentSans-Bold.ttf", weight: "700" },
+//   ],
+//   variable: "--font-body",
+//   display: "swap",
+// });
 
-const myriadPro = localFont({
-  src: [{ path: "../../public/fonts/MyriadPro-Regular.otf", weight: "400" }],
-  variable: "--font-alt",
+// const myriadPro = localFont({
+//   src: [{ path: "../../public/fonts/MyriadPro-Regular.otf", weight: "400" }],
+//   variable: "--font-alt",
+//   display: "swap",
+// });
+
+const mansoryMedium = localFont({
+  src: [{ path: "../../public/fonts/mansory-medium.otf", weight: "400" }],
+  variable: "--font-mansory-medium",
   display: "swap",
 });
 
@@ -91,7 +97,8 @@ export default async function RootLayout({
     <html
       lang="th"
       data-theme={activeTheme}
-      className={`${acciaPiano.variable} ${instrumentSans.variable} ${myriadPro.variable}`}
+      // className={`${acciaPiano.variable} ${instrumentSans.variable} ${myriadPro.variable}`}
+      className={`${mansoryMedium.variable}`}
     >
       <head>
         <link

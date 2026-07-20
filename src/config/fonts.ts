@@ -39,6 +39,14 @@ export const FONT_PAIRS = [
     body: "'IBM Plex Sans Thai', sans-serif",
     preview: "วนา VANA",
   },
+  {
+    id: "mansory-medium-prompt",
+    label: "Mansory Medium + Prompt",
+    tag: "elegant",
+    display: "var(--font-mansory-medium), serif",
+    body: "'Prompt', sans-serif",
+    preview: "วนา VANA",
+  },
 ] as const;
 
 export type FontPairId = (typeof FONT_PAIRS)[number]["id"];
